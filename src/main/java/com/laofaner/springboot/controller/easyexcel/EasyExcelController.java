@@ -1,7 +1,7 @@
 package com.laofaner.springboot.controller.easyexcel;
 
-import com.laofaner.springboot.common.ReturnModel;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "easyexcel")
 public class EasyExcelController {
 
-    public ReturnModel exportOrderData(){
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String exportOrderData() {
 
 
-
-        return null;
+        return "SUCCESS";
     }
 
 }

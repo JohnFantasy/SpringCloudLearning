@@ -1,5 +1,8 @@
 package com.laofaner.springboot.service.mock;
 
+import com.laofaner.springboot.common.ReturnModel;
+import com.laofaner.springboot.mapper.OrderMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +16,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MockOrderService {
+
+    @Autowired
+    private OrderMapper orderMapper;
+
+    public ReturnModel insertSomeOrders(){
+        return new ReturnModel();
+    }
+
 
 
 }
