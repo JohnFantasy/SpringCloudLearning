@@ -21,7 +21,6 @@ spring:
 # mybatis
 # 对应实体类的包名
 mybatis:
-  mybatis:
-    config-location: classpath:mybatis/mybatis-config.xml
-    mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
 
