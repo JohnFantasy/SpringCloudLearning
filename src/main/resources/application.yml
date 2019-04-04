@@ -1,3 +1,21 @@
 
 server:
   port: 8080
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+#  redis:
+#    url: localhost
+
+# mybatis
+# 对应实体类的包名
+mybatis:
+  typeAliasesPackage: com.laofaner.springboot.domain.entity
+  # mapper.xml文件所在位置，我放到了resources下面
+  mapperLocations: classpath:resources/mapper/*.xml
+
