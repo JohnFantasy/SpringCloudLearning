@@ -1,8 +1,8 @@
-package packageMapper.base;
+package com.laofaner.springboot.mapper.base ;
+
+import com.laofaner.springboot.domain.TBill;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
-import packageModel.TBill;
 /**
 *  @author author
 */
