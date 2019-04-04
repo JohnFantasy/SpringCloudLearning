@@ -1,5 +1,5 @@
 # SpringBoot项目的搭建
-## 集成开发环境
+## 一、集成开发环境
 ### 1.开发环境
 1. 系统：windows10 64bit
 2. 开发工具：IntelliJ IDEA
@@ -10,3 +10,4 @@
 2. Mybatis 3
 3. 缓存中间件： redis
 4. 开源工具包：easyexcel,apache poi,junit,lombok等
+## 二、
