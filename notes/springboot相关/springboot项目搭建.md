@@ -10,4 +10,5 @@
 2. Mybatis 3
 3. 缓存中间件： redis
 4. 开源工具包：easyexcel,apache poi,junit,lombok等
-## 二、
+## 二、数据库安装（MySQL 5.5）
+## 三、SpringBoot项目构建
