@@ -3,8 +3,8 @@ package com.laofaner.javasourcecode.opensourcetools.jxl;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.laofaner.opensourcetools.easyexcel.BillExcelListener;
-import com.laofaner.opensourcetools.easyexcel.BillImportVO;
+import com.laofaner.javasourcecode.opensourcetools.easyexcel.BillExcelListener;
+import com.laofaner.javasourcecode.opensourcetools.easyexcel.BillImportVO;
 import jxl.Workbook;
 import jxl.write.*;
 

@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Data
-public class TestVO extends BaseRowModel {
+public class OrderVO extends BaseRowModel {
 
     @ExcelProperty(value = {"订单号","订单号"},index = 0)
     private String orderNo;

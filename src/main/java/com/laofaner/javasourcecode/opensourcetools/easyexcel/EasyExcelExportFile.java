@@ -36,47 +36,42 @@ public class EasyExcelExportFile {
         }
         excelReader.read(new Sheet(1, 0, BillImportVO.class));
         List<BillImportVO> allRows = listener.getDatas();
-        for(BillImportVO vo : allRows){
+        for (BillImportVO vo : allRows) {
             System.out.println(vo);
         }
 
         //2、生成Excel
         OutputStream out = null;
         try {
-            out = new FileOutputStream("C:\\Users\\fanyuzhuo\\Desktop\\77.xls");
+            out = new FileOutputStream("C:\\Users\\fanyuzhuo\\Desktop\\77.xlsx");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        List<TestVO> testList = new ArrayList<>();
-//        List<TestChild> childList = new ArrayList<>();
-//        TestChild testChild = new TestChild();
-//        testChild.setCommunityName("this is a new community");
-//        childList.add(testChild);
-        TestVO testVO = new TestVO();
-        testVO.setOrderNo("1234567890");
-        testVO.setBillNo("1243");
-        testVO.setBillAmount("100");
-        testVO.setName("zhangsan");
-        testVO.setSex("男");
-        testVO.setChildren(allRows);
-        TestVO testVO2 = new TestVO();
-        testVO2.setOrderNo("987654321");
-        testVO2.setBillNo("4321");
-        testVO2.setBillAmount("0.01");
-        testVO2.setName("lisi");
-        testVO2.setSex("nv");
-        testVO2.setChildren(allRows);
-        testList.add(testVO2);
-        testList.add(testVO);
+        List<String> testListString = new ArrayList<>();
+        testListString.add("1234567890");
+        testListString.add("gfdsgf");
+        testListString.add("fvdavfds");
+        testListString.add("vfdfdvs");
+        List<String> testListString2 = new ArrayList<>();
+        testListString2.add("gres");
+        testListString2.add("个人");
+        testListString2.add("5643");
+        testListString2.add("86754fds");
+
+        List<List<String>> data = new ArrayList<>();
+        data.add(testListString);
+        data.add(testListString2);
 
 
         try {
-            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLS,true);
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX, false);
             //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
-            Sheet sheet1 = new Sheet(1, 0,TestVO.class);
+            Sheet sheet1 = new Sheet(1, 0);
             sheet1.setSheetName("第一个sheet");
-            writer.write(testList, sheet1);
+            writer.write0(data, sheet1);
+            writer.merge(1, 2, 0, 0);
+            writer.merge(1, 2, 1, 1);
             writer.finish();
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,8 +84,4 @@ public class EasyExcelExportFile {
         }
 
     }
-
-
-
-
 }
