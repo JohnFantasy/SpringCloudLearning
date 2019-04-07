@@ -2,7 +2,6 @@ package com.laofaner.springboot.service.easyexcel;
 
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.metadata.TableStyle;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.laofaner.springboot.common.ReturnModel;
 import com.laofaner.springboot.domain.entity.BillEntity;
