@@ -1,8 +1,12 @@
 package com.laofaner.springboot.controller.easyexcel;
 
+import com.laofaner.springboot.service.easyexcel.EasyExcelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @BelongsProject: SpringBoot&SpringCloud
@@ -17,11 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "easyexcel")
 public class EasyExcelController {
 
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String exportOrderData() {
+    @Autowired
+    private EasyExcelService easyExcelService;
+
+    @RequestMapping(value = "exportExcel", method = RequestMethod.GET)
+    public String exportOrderData(HttpServletResponse response) {
 
 
-        return "SUCCESS";
+        easyExcelService.exportExcel(response);
+        return "exprt SUCCESS";
     }
 
+
+    @RequestMapping(value = "importExcel", method = RequestMethod.GET)
+    public String importOrderData() {
+
+
+        return "import SUCCESS";
+    }
 }

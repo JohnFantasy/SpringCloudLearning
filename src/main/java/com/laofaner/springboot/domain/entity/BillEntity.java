@@ -64,4 +64,15 @@ public class BillEntity {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "BillEntity{" +
+                "billNo='" + billNo + '\'' +
+                ", billAmount=" + billAmount +
+                ", orderNo='" + orderNo + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
