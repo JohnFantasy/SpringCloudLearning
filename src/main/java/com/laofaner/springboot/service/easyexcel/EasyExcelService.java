@@ -163,14 +163,14 @@ public class EasyExcelService {
         try {
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition", "attachment;filename=订单账单" + ".xlsx");
+            response.setHeader("Content-Disposition", "attachment;filename=OrderReport" + ".xlsx");
             out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX, false);
             //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1);
             System.out.println(sheet1.getHeadLineMun());
             System.out.println(sheet1.getHead());
-            sheet1.setSheetName("订单账单");
+            sheet1.setSheetName("OrderReport");
             writer.write0(datas, sheet1);
             for (int i = 0; i < coor.size(); i++) {
                 writer.merge(coor.get(i)[0], coor.get(i)[1], 0, 0);
