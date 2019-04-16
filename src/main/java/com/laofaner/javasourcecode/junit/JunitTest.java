@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class JunitTest {
 
     @Test
-    public void testSql(){
-        System.out.println("junit  is  ready");
+    public void testSql() {
+        System.out.println(System.currentTimeMillis());
     }
 }

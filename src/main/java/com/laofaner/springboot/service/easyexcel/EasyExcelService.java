@@ -100,7 +100,7 @@ public class EasyExcelService {
         for (String head : rowsName) {
             headRow.add(head);
         }
-        //3、sheet中假如标题行
+        //3、sheet中加入标题行
         datas.add(headRow);
 
 
