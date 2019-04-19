@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static jxl.biff.FormatRecord.logger;
+
 /**
  * @BelongsProject: SpringBoot&SpringCloud
  * @BelongsPackage: com.laofaner.springboot.service.easyexcel
@@ -163,9 +165,9 @@ public class EasyExcelService {
         try {
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
-            response.setHeader("Content-Disposition", "attachment;filename=OrderReport" + ".xlsx");
+            response.setHeader("Content-Disposition", "attachment;filename=OrderReport" + ".xls");
             out = response.getOutputStream();
-            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX, false);
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLS, false);
             //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1);
             System.out.println(sheet1.getHeadLineMun());
@@ -187,11 +189,11 @@ public class EasyExcelService {
             try {
                 out.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("");
             }
         }
 
 
-        return null;
+        return new ReturnModel();
     }
 }
