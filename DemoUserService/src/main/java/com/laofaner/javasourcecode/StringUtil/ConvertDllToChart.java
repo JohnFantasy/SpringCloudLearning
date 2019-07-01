@@ -2,6 +2,9 @@ package com.laofaner.javasourcecode.StringUtil;
 
 import java.io.*;
 
+/*
+a util class to convert some ddls to a chart
+ */
 public class ConvertDllToChart {
 
     public static void main(String[] args) {
@@ -10,23 +13,36 @@ public class ConvertDllToChart {
             String ddl = convertDdlToChart.fileRead();
             String[] ddls = ddl.split("create table");
             for (String table : ddls) {
-//                System.out.println("create table" + table);
+//                table = "create table" + table;
+                //处理DDL信息
                 if (table.length() > 5) {
                     String tableName = table.substring(0, table.indexOf("(")).trim();
-                    System.out.println("tableName is =====" + tableName);
+//                    System.out.println("tableName is =====" + tableName);
+                    String singlDdl;
+                    if (table.contains("comment on")) {
+                        singlDdl = table.substring(0, table.indexOf("/"));
+//                        System.out.println("singleDdl is ========------" + singlDdl);
+                    }
 
                 }
-                System.out.println("--------");
+//                System.out.println("0000000000000000000000");
+                // 处理注释信息
                 if (table.contains("comment on")) {
                     String comments = table.substring(table.indexOf("comment on"));
                     String[] commentList = comments.split("/");
                     for (String comment : commentList) {
 //                        System.out.println("comment is -----" + comment);
                         if (comment != null && comment.trim().length() > 1) {
-                            System.out.println("comment is -----" + comment);
+
+                            comment = comment.trim();
+                            if (comment.startsWith("comment on table")) {
+                                System.out.println(comment.substring(17, comment.indexOf(" is")) + "\t" +
+                                        comment.substring(comment.indexOf("'") + 1, comment.length()-1));
+                            }
                         }
                     }
                 }
+//                System.out.println("--------++++++++++++++++++**************");
             }
         } catch (Exception e) {
             e.printStackTrace();

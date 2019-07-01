@@ -2,45 +2,37 @@ package com.laofaner.javasourcecode.ClimbOverTheWallTest;
 
 public class Servers {
     public static void main(String[] args) {
-        String serversStr = "10↑/10↑/10↑/10↑\t172.105.213.201\t10456\taes-256-cfb\tfafajofdsgc\t21:37:06\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t173.255.230.159\t16385\taes-256-cfb\tf55.fun-70832860\t21:37:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t185.243.57.221\t80\trc4-md5\tt.me/SSRSUB\t21:37:15\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.32.152\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:13\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t192.241.221.124\t10336\taes-256-cfb\tss8.pm-86449834\t21:37:06\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t54.255.247.167\t37726\taes-256-cfb\tC6BGgGoQknpR\t21:37:25\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t13.209.17.146\t80\taes-128-ctr\txiao\t21:37:11\tKR\t\n" +
-                "10↑/10↑/10↑/10↑\t128.199.187.62\t10519\taes-256-cfb\tssx.re-63316244\t21:37:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.80.198\t15997\taes-256-cfb\tf55.fun-40352028\t21:37:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.45.169\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:15\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.56.89.49\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:16\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t172.104.123.158\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:17\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t172.105.217.127\t14541\taes-256-cfb\tTPOYVGxKglpi\t21:37:12\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t45.76.222.9\t1025\trc4-md5\tYZcCjQ\t21:37:41\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t66.175.223.22\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:16\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t172.104.188.241\t19411\taes-256-cfb\tf55.fun-76602072\t21:37:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t165.22.254.31\t12652\taes-256-cfb\tss8.pm-33269466\t21:37:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t139.162.37.161\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:12\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t3.1.80.143\t80\taes-128-ctr\txiao\t21:37:08\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.58.222\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:15\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.110.189\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:15\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t172.104.56.73\t15260\taes-256-cfb\tf55.fun-64104240\t21:37:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t139.162.1.34\t15913\taes-256-cfb\tf55.fun-98475083\t21:37:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t134.209.48.248\t16491\taes-256-cfb\tssx.re-66511103\t21:37:06\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t213.183.48.10\t13004\trc4-md5\tss8.pm-11026841\t21:37:06\tRU\t\n" +
-                "10↑/10↑/10↑/10↑\t139.162.115.215\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:17\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t3.0.249.3\t80\taes-128-ctr\txiao\t21:37:16\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t192.241.226.191\t12476\taes-256-cfb\tssx.re-41276871\t21:37:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.48.155\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:16\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t13.209.97.133\t80\taes-128-ctr\txiao\t21:37:16\tKR\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.69.91\t17302\taes-256-cfb\tf55.fun-85071251\t21:37:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t172.104.39.134\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t21:37:12\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t45.77.175.103\t2019\taes-128-ctr\tdoub.io\t21:37:13\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.105.253\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:14\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.33.50.150\t443\taes-256-cfb\t9d6cceaa373bf2c8acb22e60b6a58be6\t21:37:10\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t185.173.94.244\t2333\taes-128-ctr\tdoub.io\t21:37:24\tRU\t\n" +
-                "10↑/10↑/10↑/10↑\t91.188.223.72\t8080\trc4-md5\thttp://t.cn/EGJIyrl\t21:37:16\tRU\t\n" +
-                "10↑/10↑/10↑/10↑\t46.29.162.46\t1026\trc4-md5\t91vpn.cf\t21:37:13\tRU\t\n" +
-                "10↑/10↑/10↑/10↑\t104.167.97.164\t543\trc4-md5\thttp://t.cn/RD0D7sx\t21:37:21\tCA\t";
+        String serversStr = "10↑/10↑/10↑/10↑\t165.22.111.211\t18338\tisx.yt-04748344\taes-256-cfb\t09:12:06\tSG\t\n" +
+                "10↑/10↑/10↑/10↑\t207.148.111.121\t10\tlncn.org n2\trc4\t09:12:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t139.162.25.148\t8097\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\taes-256-cfb\t09:12:15\tGB\t\n" +
+                "10↑/10↑/10↑/10↑\t216.83.57.224\t2333\tdoub.io\taes-256-cfb\t09:12:18\tHK\t\n" +
+                "10↑/10↑/10↑/10↑\t5.183.177.70\t443\twww.xbvpn.com\taes-256-cfb\t09:12:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t172.104.92.92\t8097\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\taes-256-cfb\t09:12:15\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t5.181.5.170\t443\twww.xbvpn.com\taes-256-cfb\t09:12:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t172.105.113.18\t8097\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\taes-256-cfb\t09:12:16\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t194.156.120.129\t6767\tQq676762614\taes-256-cfb\t09:13:04\tRU\t\n" +
+                "10↑/10↑/10↑/10↑\t104.167.108.88\t48889\thttp://t.cn/RD0D7sx\taes-128-ctr\t09:12:14\tCA\t\n" +
+                "10↑/10↑/10↑/10↑\t5.183.177.42\t443\twww.xbvpn.com\taes-256-cfb\t09:12:15\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t159.65.135.193\t17546\tisx.yt-73046160\taes-256-cfb\t09:12:06\tSG\t\n" +
+                "10↑/10↑/10↑/10↑\t123.202.111.60\t4131\t7pZo7Jc3h1\tchacha20\t09:12:15\tHK\t\n" +
+                "10↑/10↑/10↑/10↑\t46.173.215.146\t48888\thttp://t.cn/EGJIyrl\taes-128-ctr\t09:12:14\tRU\t\n" +
+                "10↑/10↑/10↑/10↑\t103.117.103.179\t41087\tLeung！8848.\taes-256-cfb\t09:12:19\tHK\t\n" +
+                "10↑/10↑/10↑/10↑\t114.36.121.73\t4131\t7pZo7Jc3h1\tchacha20\t09:12:14\tTW\t\n" +
+                "10↑/10↑/10↑/10↑\t192.241.232.121\t18658\tisx.yt-83202889\taes-256-cfb\t09:12:05\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t23.244.89.184\t2133\twww.eieee.cn\taes-256-cfb\t09:12:14\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t46.105.247.176\t2133\twww.eieee.cn\taes-256-cfb\t09:12:13\tNL\t\n" +
+                "10↑/10↑/10↑/10↑\t192.241.206.14\t17569\tisx.yt-67200442\taes-256-cfb\t09:12:05\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t5.183.177.126\t443\twww.xbvpn.com\taes-256-cfb\t09:12:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t206.189.46.48\t16131\tisx.yt-65268444\taes-256-cfb\t09:12:07\tSG\t\n" +
+                "10↑/10↑/10↑/10↑\t162.243.144.103\t11234\tisx.yt-59459743\taes-256-cfb\t09:12:06\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t23.225.175.197\t2333\tdoub.io\taes-128-ctr\t09:12:11\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t167.179.78.144\t10\tlncn.org n2\trc4\t09:12:10\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t172.104.70.233\t8097\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\taes-256-cfb\t09:12:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t219.76.161.216\t4131\t7pZo7Jc3h1\tchacha20\t09:12:13\tHK\t\n" +
+                "10↑/10↑/10↑/10↑\t198.255.103.62\t8097\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\taes-256-cfb\t09:12:11\tUS\t\n" +
+                "10↑/10↑/10↑/10↑\t188.119.64.20\t48887\tt.me/SSRSUB\taes-128-ctr\t09:12:15\tRU\t\n" +
+                "10↑/10↑/10↑/10↑\t139.180.163.118\t80\tqwert\taes-256-cfb\t09:12:16\tSG\t\n" +
+                "10↑/10↑/10↑/10↑\t103.90.224.80\t1025\tYZcCjQ\tchacha20-ietf\t09:12:28\tVN\t";
 
         String json = "    {\n" +
                 "      \"server\": \"45.77.254.220\",\n" +
@@ -69,8 +61,8 @@ public class Servers {
                 System.out.println("    {\n" +
                         "      \"server\": \"" + ip + "\",\n" +
                         "      \"server_port\": " + port + ",\n" +
-                        "      \"password\": \"" + method + "\",\n" +
-                        "      \"method\": \"" + password + "\",\n" +
+                        "      \"password\": \"" + password + "\",\n" +
+                        "      \"method\": \"" + method + "\",\n" +
                         "      \"plugin\": \"\",\n" +
                         "      \"plugin_opts\": \"\",\n" +
                         "      \"plugin_args\": \"\",\n" +
