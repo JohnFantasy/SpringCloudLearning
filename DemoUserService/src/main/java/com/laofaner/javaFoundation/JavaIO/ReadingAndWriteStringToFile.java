@@ -9,7 +9,7 @@ import java.io.*;
 public class ReadingAndWriteStringToFile {
 
     public static void main(String args[]) {
-        readFile();
+//        readFile();
 //        writeFile();
         appendContent("C:\\Users\\laofa\\Desktop\\测试文件", "XXXXX\r\n");
     }
