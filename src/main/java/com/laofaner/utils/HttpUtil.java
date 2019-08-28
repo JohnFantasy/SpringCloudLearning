@@ -1,4 +1,4 @@
-package com.laofaner.javasourcecode.utils;
+package com.laofaner.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

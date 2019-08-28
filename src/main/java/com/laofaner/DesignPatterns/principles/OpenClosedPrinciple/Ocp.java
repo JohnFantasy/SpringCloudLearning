@@ -1,7 +1,5 @@
 package com.laofaner.DesignPatterns.principles.OpenClosedPrinciple;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_HARD_LIGHTPeer;
-
 /**
  * @program: SpringBoot&SpringCloud
  * @description: 开闭原则demo

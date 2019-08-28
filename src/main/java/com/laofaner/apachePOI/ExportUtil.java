@@ -1,4 +1,4 @@
-package com.laofaner.commonutils.apachePOI;
+package com.laofaner.apachePOI;
 
 /**
  *
