@@ -123,7 +123,14 @@
 	- 二进制兼容性验证
 ## 类的准备阶段
 ## 类的初始化
-# 四、	
+# 四、类加载器
+
+## 1、根类加载器（启动类加载器） BootstrapClassloader
+## 2、扩展类加载器ExtenssionClassloader
+## 3、系统（应用）类加载器App Classloader
+## 4、用户自定义类加载器CustomClassloader
+## 5、双亲委派机制
+
 
 # 五、
 
