@@ -24,7 +24,7 @@ public class Confusing {
 //    }
 
     static int f(Object... args) { return 1; }
-    static int f(int... args) { return 2; }
+    static Integer f(Integer... args) { return 2; }
 
     public static void main(String... args) {
         int result = f(1, 2, 3);
