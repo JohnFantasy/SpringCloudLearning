@@ -5,11 +5,11 @@ import com.laofaner.commonutils.CoordinateConvertion;
 import com.laofaner.springboot.domain.dto.TestDTO;
 import com.laofaner.springboot.domain.entity.TestEntity;
 import com.laofaner.springboot.domain.vo.Coornidate;
+import com.laofaner.springboot.domain.vo.Student;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 
 /**
  * @program: SpringBoot&SpringCloud

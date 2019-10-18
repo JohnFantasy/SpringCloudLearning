@@ -1,4 +1,4 @@
-package com.laofaner.springboot.controller.demo;
+package com.laofaner.springboot.domain.vo;
 
 import java.math.BigDecimal;
 
