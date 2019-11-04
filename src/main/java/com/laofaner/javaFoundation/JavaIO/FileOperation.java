@@ -31,8 +31,8 @@ public class FileOperation {
                 }
             }
             System.out.println(filesToBeDeleted.size());
-            for(File filex : filesToBeDeleted){
-                System.out.println("file to be deleted--->"+filex.getName());
+            for (File filex : filesToBeDeleted) {
+                System.out.println("file to be deleted--->" + filex.getName());
                 filex.delete();
             }
 //            for (File file1 : files) {
