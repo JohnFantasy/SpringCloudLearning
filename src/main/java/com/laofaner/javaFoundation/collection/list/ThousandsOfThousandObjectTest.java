@@ -1,7 +1,6 @@
 package com.laofaner.javaFoundation.collection.list;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
