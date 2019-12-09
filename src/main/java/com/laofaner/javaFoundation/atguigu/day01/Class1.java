@@ -19,11 +19,16 @@ public class Class1 {
 //        System.out.println(list);
 //        Collections.reverse(list);
 //        System.out.println(list);
-        int a = 10;
-        int b = 10;
-        method(a, b);
-        System.out.println(a);
-        System.out.println(b);
+//        int a = 10;
+//        int b = 10;
+//        method(a, b);
+//        System.out.println(a);
+//        System.out.println(b);
+        int[] arr = new int[10];
+        char[] arr1 = {'a','b','c'};
+//        char[] arr1 = new char[10];
+        System.out.println(arr);
+        System.out.println(arr1);
     }
 
     private static void method(int a, int b) {
