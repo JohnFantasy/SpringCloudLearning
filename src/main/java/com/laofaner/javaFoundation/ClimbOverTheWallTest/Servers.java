@@ -2,32 +2,13 @@ package com.laofaner.javaFoundation.ClimbOverTheWallTest;
 
 public class Servers {
     public static void main(String[] args) {
-        String serversStr = "10↑/10↑/10↑/10↑\t198.199.95.180\t13433\tisx.yt-65423210\taes-256-cfb\t10:42:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t139.162.41.165\t12856\tf55.fun-11319807\taes-256-cfb\t10:42:06\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t206.189.149.132\t10793\tssx.re-45325756\taes-256-cfb\t10:42:07\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t91.188.223.35\t80\t12345\trc4-md5\t10:42:08\tRU\t\n" +
-                "10↑/10↑/10↑/10↑\t192.241.209.132\t10767\tisx.yt-20288928\taes-256-cfb\t10:42:04\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t205.185.123.165\t9999\tt.me/SSRSUB\trc4-md5\t10:42:11\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t159.65.6.120\t13398\tisx.yt-01639509\taes-256-cfb\t10:42:05\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t54.169.133.81\t443\tbbrc173\tchacha20\t10:42:11\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t52.221.230.248\t443\tbbrc173\tchacha20\t10:42:08\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t192.241.199.224\t15131\tss8.pm-17069625\taes-256-cfb\t10:42:06\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t45.84.1.61\t34567\t83411131\taes-256-cfb\t10:42:06\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t38.100.229.84\t39\tbannedbook.org\taes-256-cfb\t10:42:07\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t92.223.59.42\t57589\tNtya8Q\trc4-md5\t10:42:11\tGB\t\n" +
-                "10↑/10↑/10↑/10↑\t34.220.74.172\t443\tbbrc173\tchacha20\t10:42:22\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t13.231.170.111\t26119\tE3nbTDcxCHP3\taes-256-cfb\t10:42:07\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t45.88.42.58\t3572\tcht1997...///\trc4-md5\t10:42:11\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t178.128.53.54\t15516\tss8.pm-62123833\taes-256-cfb\t10:42:06\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t178.128.53.146\t13715\tisx.yt-97114188\taes-256-cfb\t10:42:06\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t104.248.173.190\t18934\tss8.pm-37075945\taes-256-cfb\t10:42:04\tGB\t\n" +
-                "10↑/10↑/10↑/10↑\t45.63.28.224\t13393\taph8bh\taes-256-cfb\t10:42:09\tAU\t\n" +
-                "10↑/10↑/10↑/10↑\t192.241.211.201\t18961\tisx.yt-52372012\taes-256-cfb\t10:42:04\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t18.179.49.72\t443\tbbrc173\tchacha20\t10:42:14\tJP\t\n" +
-                "10↑/10↑/10↑/10↑\t167.172.192.31\t12572\tssx.re-78207137\taes-256-cfb\t10:42:06\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t5.34.176.104\t9999\tt.me/SSRSUB\trc4-md5\t10:42:10\tSG\t\n" +
-                "10↑/10↑/10↑/10↑\t198.199.96.17\t11516\tssx.re-86226766\taes-256-cfb\t10:42:05\tUS\t\n" +
-                "10↑/10↑/10↑/10↑\t114.38.89.115\t3572\tcht1997...///\trc4-md5\t10:42:09\tTW";
+        String serversStr = "10↑/10↑/10↑/10↑\t45.77.58.5\t31820\tchacha20-ietf-poly1305\tZsOUjNLy\t13:37:05\tGB\t\n" +
+                "10↑/10↑/10↑/10↑\t136.244.86.108\t32991\tchacha20-ietf-poly1305\tiuO08Mir\t13:37:05\tDE\t\n" +
+                "10↑/10↑/10↑/10↑\t45.32.42.19\t80\trc4\tdongtaiwang.com\t13:37:06\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t139.162.67.40\t8097\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t13:37:14\tJP\t\n" +
+                "10↑/10↑/10↑/10↑\t172.104.99.75\t8099\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t13:37:13\tJP\t\n" +
+                "10↑/10↑/10↑/9↑\t149.28.66.98\t35438\tchacha20-ietf-poly1305\tPIICkklQ\t13:37:05\tUS\t\n" +
+                "10↑/10↑/10↑/9↓\t45.79.111.160\t8099\taes-256-cfb\teIW0Dnk69454e6nSwuspv9DmS201tQ0D\t13:37:07\tUS";
 
         String json = "    {\n" +
                 "      \"server\": \"45.77.254.220\",\n" +
@@ -53,8 +34,8 @@ public class Servers {
             System.out.println("    {\n" +
                     "      \"server\": \"" + ip + "\",\n" +
                     "      \"server_port\": " + port + ",\n" +
-                    "      \"password\": \"" + method + "\",\n" +
-                    "      \"method\": \"" + password + "\",\n" +
+                    "      \"password\": \"" +password  + "\",\n" +
+                    "      \"method\": \"" + method + "\",\n" +
                     "      \"plugin\": \"\",\n" +
                     "      \"plugin_opts\": \"\",\n" +
                     "      \"plugin_args\": \"\",\n" +

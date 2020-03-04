@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestInterceptor implements HandlerInterceptor {
 
     @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        return false;
+    }
+
+    @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
     }

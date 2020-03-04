@@ -1,5 +1,10 @@
 package com.laofaner.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.laofaner.javaFoundation.JavaIO.ReadingAndWriteStringToFile;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +12,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
+import java.util.Iterator;
 
 /**
  *
@@ -78,6 +83,36 @@ public class HttpUtil {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/get?access_token" +
+                "=31_r3jR3-lB3OitmgWxTUhRhgXP1Dlt3xCMfUx6Jr1ZN-WZf3VJxQEcLRDr2O7VU_nmwYIIozmPUDLRqnjhbCzLpibB8VcG9llcV8izof8dWBFlsskcq9SViCn5jAsWZbX8QaRa-wJsgBFuBAu5DOSeAGALWA&next_openid=";
+        String next_openid = "";
+        int count = 10000;
+        while (count == 10000) {
+            try {
+                JSONObject result = JSON.parseObject(HttpUtil.get(baseUrl + next_openid));
+                int total = (int) result.get("total");
+                JSONObject data = (JSONObject) result.get("data");
+                JSONArray openid = (JSONArray) data.get("openid");
+                Iterator<Object> iterator = openid.iterator();
+                StringBuilder openidList = new StringBuilder("");
+                while (iterator.hasNext()) {
+                    openidList.append(iterator.next().toString()).append(",\n");
+                }
+
+
+                ReadingAndWriteStringToFile.appendContent("C:\\Users\\laofa\\Desktop\\test", openidList.toString());
+                next_openid = (String) result.get("next_openid");
+                System.out.println(next_openid);
+                count = (int) result.get("count");
+            } catch (Exception e) {
+                count = 1;
+                e.printStackTrace();
+            }
+        }
+
     }
 }
 
