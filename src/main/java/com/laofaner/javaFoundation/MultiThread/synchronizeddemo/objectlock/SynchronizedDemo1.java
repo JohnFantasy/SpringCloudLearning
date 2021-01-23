@@ -1,11 +1,11 @@
-package com.laofaner.javaFoundation.MultiThread.synchronizeddemo;
+package com.laofaner.javaFoundation.MultiThread.synchronizeddemo.objectlock;
 
 /**
  * @author fanyuzhuo
  * @createAt 2021-01-23 16:00
  * @description
  */
-public class Main {
+public class SynchronizedDemo1 {
 
     public static void main(String[] args) {
 

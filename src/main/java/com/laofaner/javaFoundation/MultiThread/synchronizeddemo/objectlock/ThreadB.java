@@ -1,4 +1,4 @@
-package com.laofaner.javaFoundation.MultiThread.synchronizeddemo;
+package com.laofaner.javaFoundation.MultiThread.synchronizeddemo.objectlock;
 
 /**
  * @author fanyuzhuo
