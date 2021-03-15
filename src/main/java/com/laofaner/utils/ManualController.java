@@ -23,8 +23,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-@Controller
-@RequestMapping("/manual/")
+
+
+
 public class ManualController {
 
     private static final Logger logger = LogManager.getLogger(ManualController.class);
@@ -142,7 +143,7 @@ public class ManualController {
 
     public static void main(String[] args) {
         try {
-            Word2007ToHtml("C:\\Users\\fanyuzhuo\\Desktop", "附件03：重庆三峡银行集中作业系统项目需求分析说明书-v1.9", ".docx", "C:\\Users\\fanyuzhuo\\Desktop\\");
+            Word2007ToHtml("C:\\Users\\fanyuzhuo\\Desktop", "慧生活测试数据库设计文档", ".docx", "C:\\Users\\fanyuzhuo\\Desktop\\");
         } catch (Exception e) {
             e.printStackTrace();
         }
