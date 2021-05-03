@@ -2,6 +2,7 @@ package com.laofaner.springboot.controller.demo;
 
 import com.laofaner.commonutils.BeanConvertUtils;
 import com.laofaner.commonutils.CoordinateConvertion;
+import com.laofaner.commonutils.Word2Pdf;
 import com.laofaner.springboot.domain.dto.TestDTO;
 import com.laofaner.springboot.domain.entity.TestEntity;
 import com.laofaner.springboot.domain.vo.Coornidate;
@@ -38,6 +39,8 @@ public class DemoController {
         BigDecimal lng = new BigDecimal(Double.parseDouble(ret.split(",")[0]));
         BigDecimal lat = new BigDecimal(Double.parseDouble(ret.split(",")[1]));
         coornidate.setLongitude(lng);
+        StringBuffer sb = new StringBuffer("");
+        sb.reverse();
         coornidate.setLatitude(lat);
         return coornidate;
     }
@@ -48,5 +51,11 @@ public class DemoController {
     @RequestMapping(method = RequestMethod.POST, value = "beanConvertTest")
     public TestDTO beanConvertTest(@RequestBody TestEntity testEntity) {
         return BeanConvertUtils.convertUserEntityToDTO(testEntity);
+    }
+
+    @GetMapping("/testWorToPdf")
+    public String test() {
+        Word2Pdf.word2Pdf();
+        return "SUCCESS";
     }
 }
