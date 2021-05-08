@@ -1,7 +1,5 @@
 package com.laofaner.javaFoundation.messageFormatTests;
 
-import lombok.Data;
-
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +33,25 @@ public class MessageFormatTests {
     }
 }
 
-@Data
 class Student {
+
     private String name;
 
     private String hobbies;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
 }
