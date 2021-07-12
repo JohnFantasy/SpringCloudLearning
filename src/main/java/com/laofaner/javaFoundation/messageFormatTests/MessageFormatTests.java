@@ -24,7 +24,7 @@ public class MessageFormatTests {
         list.add(student1);
         list.add(student2);
         Object[] objects = list.toArray();
-        MessageFormat mf = new MessageFormat("(#{objects[{0}].getName()})");
+        MessageFormat mf = new MessageFormat("objects[{0}].getName()");
         for (int i = 0; i < objects.length; i++) {
             String str = mf.format(new Object[i]);
             System.out.println(str);

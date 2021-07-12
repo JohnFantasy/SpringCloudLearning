@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  * 主要有三种语法格式：
  * 对象::实例方法名
  * 类::静态方法名
- * 类::实力方法名
+ * 类::实例方法名
  */
 public class TestMethodReference {
 
