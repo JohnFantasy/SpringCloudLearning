@@ -10,7 +10,21 @@ public class StringTests {
 
     public static void main(String[] args) {
         String a = "abc";
-        String b = "abc";
+        String b = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         System.out.println(a == b);
+
+        char[] chars = b.toCharArray();
+        for (char aChar : chars) {
+            System.out.println((int) aChar);
+        }
+        char ch = 58;
+        System.out.println(ch);
+        System.out.println(a.codePointAt(0));
+
+        for(int i= 0;i<256;i++){
+            System.out.println((char)i);
+        }
+
+        Integer integer = 1;
     }
 }
