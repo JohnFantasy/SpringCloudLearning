@@ -26,12 +26,12 @@ public class CASDemo {
             多个线程运算出同一个值
 
             Q:怎么解决问题？
-            A:对count++操作的时候，让多个线程排队处理，多个线程同时到达reques()方法时
+            A:对count++操作的时候，让多个线程排队处理，多个线程同时到达request()方法时
             ，只允许一个线程可以去操作，其他线程在外面等待，等里面的线程处理完毕以后，外面
             等着的线程再进去一个，这样操作的count++就是排队进行的，结果一定是正确的
 
             Q：怎么实现排队效果呢？
-            A：Java中的synchronized关键字和RentrentLock都可以实现对资源加锁，保证并发正确性
+            A：Java中的synchronized关键字和ReentrantLock都可以实现对资源加锁，保证并发正确性
             多线程情况下可以保证被锁住的资源被“串行”访问
          */
         count++;
@@ -43,18 +43,15 @@ public class CASDemo {
         CountDownLatch countDownLatch = new CountDownLatch(threadSize);
 
         for (int i = 0; i < threadSize; i++) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        for (int j = 0; j < 10; j++) {
-                            request();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        countDownLatch.countDown();
+            Thread thread = new Thread(() -> {
+                try {
+                    for (int j = 0; j < 10; j++) {
+                        request();
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    countDownLatch.countDown();
                 }
             });
             thread.start();

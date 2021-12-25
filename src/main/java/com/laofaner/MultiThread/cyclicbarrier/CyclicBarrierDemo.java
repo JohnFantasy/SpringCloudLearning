@@ -25,9 +25,7 @@ public class CyclicBarrierDemo {
                     System.out.println(Thread.currentThread().getName() + " 运动员，进场");
                     barrier.await();
                     System.out.println(Thread.currentThread().getName() + "  运动员出发");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
+                } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
             });

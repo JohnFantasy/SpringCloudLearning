@@ -1,4 +1,4 @@
-package com.laofaner.MultiThread;
+package com.laofaner.MultiThread.ThreadsCommunication;
 
 /**
  * @author fanyuzhuo
