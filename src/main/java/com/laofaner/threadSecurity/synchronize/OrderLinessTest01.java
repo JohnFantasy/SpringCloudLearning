@@ -16,19 +16,24 @@ public class OrderLinessTest01 {
 
     int num = 0;
     boolean ready = false;
+    private static final Object obj = new Object();
 
     @Actor
     public void actor1(I_Result r) {
-        if (ready) {
-            r.r1 = num + num;
-        } else {
-            r.r1 = 1;
+        synchronized (obj) {
+            if (ready) {
+                r.r1 = num + num;
+            } else {
+                r.r1 = 1;
+            }
         }
     }
 
     @Actor
     public void actor2(I_Result r) {
-        num = 2;
-        ready = true;
+        synchronized (obj) {
+            num = 2;
+            ready = true;
+        }
     }
 }

@@ -92,23 +92,108 @@ synchronized(锁对象){
 }
 ```
 
-## synchronized保证原子性
+## 1、synchronized保证原子性
 
 ``` Java
 
 ```
 synchronized保证原子性的原理：
 对代码块使用synchronized修饰后，保证同一时间只有一个线程能执行该代码块，从而不会出现线程安全问题。
+## 2、synchronized保证可见性
+![img.png](img.png)
+一个线程修改了共享变量之后，其他的线程并不知道，依然使用的是之前从主内存拷贝到自己工作内存的值.
+执行synchronized代码块时，对应jvm的lock原子操作，会刷新工作内存中的共享变量的值为主内存中最新的值。
+## 3、synchronized保证有序性
 
+#### synchronized是如何保证有序性的呢？
 
-
-## synchronized保证可见性
-## synchronized保证有序性
-
+synchronized修饰代码块，不会阻止编译器和处理第对代码块内的代码进行重排序，但是能保证只有一个线程执行同步代码块中的代码，从而保证有序性。
 
 # 第四章 synchronized的特性
 
+## synchronized的可重入特性
+
+什么是可重入？
+
+一个线程可以多次执行synchronized代码块，重复获取同一把锁。
+
+了解synchronized可重入的原理。
+
+synchronized的锁对象中有一个计数器(recursions变量)，会记录线程获得锁的次数。
+
+### 可重入的好处
+
+- 避免死锁
+- 可以让我们更好的来封装代码
+
+## 小结
+
+synchronized是可重入锁，内部锁对象中有一个计数器来记录线程获取所得次数，进入同步代码块时，内部锁对象的计数器+1；在执行完同步代码块时，计数器-1，知道计数器的数量为0，则释放锁
+
+## synchronized的不可中断特性
+
+- 学习synchronized不可中断特性
+- 学习Lock的可中断特性
+
+**什么是不可中断性？**
+
+一个线程获得锁后，另一个线程想要获得锁，必须处于阻塞或等待状态，一个线程不释放锁，第二个线程会一直阻塞或等待，不可中断一直等待。
+
+## 小结
+
+不可中断是指：当一个线程获得锁，另一个线程一直处于阻塞或等待状态，前一个线程不释放锁，后一个线程会一直阻塞或等待，不可被中断
+
+synchronized属于不可中断锁
+
+Lock.lock()属于不可中断锁
+
+Lock.tryLock()属于可终端的锁
+
 # 第五章 synchronized原理
+
+## 使用javap反汇编学习synchronized原理
+
+javap -p -v  .class文件
+
+monitorenter指令和monitorexit指令
+
+## 同步代码块
+
+### monitorenter
+
+synchronized的锁对象会关联一个monitor对象，这个对象不是我们主动创建的，而是JVM线程执行到这个代码块时发现锁对象没有monitor对象，就会创建一个C++对象。monitor对象有两个重要的成员变量：
+
+- owner：拥有这把锁的线程
+- recursions：记录线程拥有锁的次数，当一个线程拥有monitor后，其他线程只能等待
+
+### monitorexit
+
+- 能执行monitor指令的线程一定是拥有当前对象的锁的线程
+- 当执行monitorexit指令时，会把recursions做-1操作，当recursions为0时，则会释放这把锁
+
+### synchronized出现异常会释放锁吗？
+
+**会**
+
+## 同步方法
+
+**ACC_SYNCHRONIZED synchronized修饰的实例方法，会被JVM用ACC_SYNCHRONIZED修饰，隐式地调用monitorenter和monitorexit，在执行同步方法前会执行monitorenter，在执行同步方法后会执行monitorexit指令**
+
+## synchronized和Lock的区别
+
+- synchronized是关键字，Lock是接口
+- synchronized自动释放锁，Lock必须手动释放锁
+- synchronized不可中断，Lock可中断也可不中断
+- synchronized能锁代码块和方法，Lock只能锁代码块
+- synchronized不能知道线程有没有拿到锁，Lock可以
+- Lock可以使用读锁提高多线程读写效率
+- synchronized是非公平锁，Lock可以控制是否公平
+
+## 深入JVM源码
+
+### monitor监视器锁
+
+![image-20220104174116339](image-20220104174116339.png)
 
 
 

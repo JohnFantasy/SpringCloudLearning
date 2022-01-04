@@ -16,6 +16,9 @@ public class VisibilityTest01 {
     public static void main(String[] args) throws InterruptedException {
         new Thread(() -> {
             while (flag) {
+                synchronized (obj){
+
+                }
 //                System.out.println("Thread 1 read the value: " + flag);
             }
         }).start();
