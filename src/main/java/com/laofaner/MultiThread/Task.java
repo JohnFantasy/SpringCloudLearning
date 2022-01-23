@@ -15,12 +15,12 @@ public class Task implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("执行当前任务的线程是："+Thread.currentThread().getName());
+        System.out.println("执行当前任务的线程是：" + Thread.currentThread().getName());
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("我是任务："+nov+",我在执行。。。。。。");
+        System.out.println("我是任务：" + nov + ",我在执行。。。。。。");
     }
 }

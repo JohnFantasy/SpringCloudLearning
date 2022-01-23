@@ -27,7 +27,7 @@
 
 ### 内存
 
-​    内存读写速度与CPU运算速度之间的差距成为计算机性能瓶颈，为了解决这个问题，设计了缓存
+内存读写速度与CPU运算速度之间的差距成为计算机性能瓶颈，为了解决这个问题，设计了缓存
 
 ### 缓存
 
@@ -81,7 +81,7 @@ volatile
 
 在JMM中，通过以下8个原子操作来保证主内存和工作内存之间的数据交互：
 
-lock->read->load->use->assign->store->write->unlock
+``` lock->read->load->use->assign->store->write->unlock ```
 
 # 第三章 synchronized保证三大特性
 
@@ -219,7 +219,7 @@ synchronized的锁对象会关联一个monitor对象，这个对象不是我们�
    
    1. Markword
       
-       ![](E:\Github\SpringCloudLearning\notes\面试题整理\Pictures\2022-01-05-10-20-30-image.png)
+      ![](..\Pictures\2022-01-05-10-20-30-image.png)
    
    2. klass类型指针
 
@@ -249,7 +249,6 @@ synchronized的锁对象会关联一个monitor对象，这个对象不是我们�
    - 操作数栈
    - 动态链接
    - 方法出口
-   
    1. 判断当前对象是否处于无锁状态（hashcode、0、01），如果是，则JVM首先在当前线程的栈帧中建立一个名为锁记录（Lock Record）的空间，用于存储对象目前的Mark Word的拷贝（官方将这份拷贝加了一个Displaced前缀，即Displaced Mark Word），将对象的Mark Word复制到栈帧中的Lock Record中，将Lock Record中的owner指向当前对象。
    2. JVM尝试利用CAS操作将对象的Mark Word更新为指向Lock Record的指针，如果成功表示竞争到锁，则将锁标志位改为00，执行同步操作
    3. 如果失败则判断当前对象的Mark Word是否指向当前线程的栈帧，如果是则表示当前线程已经持有当前对象的锁，则直接执行同步代码块；否则只能说明该锁对象已经被其他线程占用了，这时轻量级锁就要膨胀为重量级锁，锁标志位变为10，后面等待的线程会进入阻塞状态。
@@ -258,18 +257,34 @@ synchronized的锁对象会关联一个monitor对象，这个对象不是我们�
 
 在多线程交替执行同步代码块的时候，可以避免重量级锁引起的性能消耗。
 
-# 浅析synchronized关键字
+## 3、自旋锁
 
-## 修饰实例方法
+jdk1.4引入，默认关闭；jdk1.6之后默认开启，同时引入了适应性自旋锁，自旋锁的默认自旋次数为10次，可以使用参数-XX:PreBlockSpin来修改自旋次数，意味着自旋的次数不再固定，由前一次自旋的结果决定。如果在同一个锁对象上，自选等待刚刚成功获得过锁，并且持有锁的线程正在运行中，那么虚拟机就会认为这次自旋也很有可能会成功，进而它将允许自旋更长的时间，比如100次循环。另外，如果对于某个锁，自旋很少成功获取到，那么以后在再次尝试获得锁的时候，将可能省略掉自旋过程，以避免浪费处理器资源。有了自适应自旋，随着程序运行和性能监控信息的不断完善，虚拟机对程序锁的状况预测就会越来越准，虚拟机就会越来越聪明了。
 
-## 修饰静态方法
+## 4、锁消除
 
-## 修饰代码块
+![image-20220113102848439](../Pictures/image-20220113102848439.png)
 
-# synchronized关键字的使用
+## 5、锁粗化
 
-# synchronized关键字底层原理
+![image-20220113103229084](../Pictures/image-20220113103229084.png)
 
-# 锁的升级流程
+jvm会探测到一连串的细小的操作都使用同一个对象加锁，将同步代码块的加锁范围放大，放到这串操作的外面，这样只需要加一次锁即可。
 
-# synchronized关键字修饰方法的底层原理
+# 平时写代码如何对synchronized优化
+
+## 1、减少synchronized范围
+
+## 2、降低synchronized粒度
+
+经典：HashTable  V.S. ConcurrentHashMap
+
+## 3、读写分离
+
+读的时候不加锁，写的时候才加锁
+
+ConcurrentHashMap
+
+CopyOnWriteArraylist
+
+CopyOnWriteSet
