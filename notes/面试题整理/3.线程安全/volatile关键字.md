@@ -69,6 +69,7 @@ class MyThread extends Thread {
 ### 1.2.1 概述
 
 **  JMM：Java Memory Model**
+共享内存和私有内存
 
 ### 1.2.2
 
