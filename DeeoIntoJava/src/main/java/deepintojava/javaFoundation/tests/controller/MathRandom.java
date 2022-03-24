@@ -22,8 +22,10 @@ public class MathRandom {
      */
     public static void main(String[] agrs) {
 
-        //java.lang.Math.random() 返回一个正符号的double值，大于或等于0.0且小于1.0
+        //java.lang.Math.random() 返回一个正符号的double值，大于或等于0.0且小于1.0
         MathRandom redpacketGenerator = new MathRandom();
+
+        Math.max(1,2);
 
         Map<String, String> redpacketRules = new HashMap<>();
 

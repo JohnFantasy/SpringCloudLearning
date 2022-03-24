@@ -7,7 +7,7 @@ package deepintojava.utils;
  */
 public class SSQTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String s = HttpUtil.get("http://182.92.109.149/getData/ssq.TXT");
         System.out.println(s);
     }

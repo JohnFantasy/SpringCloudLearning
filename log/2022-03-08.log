@@ -1,0 +1,72 @@
+11:05:07.935 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 11608 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+11:05:07.937 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default
+11:05:08.898 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+11:05:08.917 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+11:05:08.926 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+11:05:08.927 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+11:05:09.055 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+11:05:09.056 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1057 ms
+11:05:09.495 [main] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+11:05:09.570 [main] INFO  c.l.s.interceptors.WebMvcCfgAdapter - 拦截器org.springframework.web.servlet.config.annotation.InterceptorRegistry@6dcd5639
+11:05:10.135 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+11:05:10.164 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+11:05:10.168 [main] INFO  c.l.s.SpringBootLearningApplication - Started SpringBootLearningApplication in 2.824 seconds (JVM running for 3.808)
+11:05:14.238 [Thread-4] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+11:08:44.860 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 8412 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+11:08:44.870 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default
+11:09:51.247 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+11:09:51.308 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+11:09:51.422 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+11:09:51.423 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+11:09:52.050 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+11:09:52.050 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 47117 ms
+11:12:21.616 [main] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+11:12:21.645 [main] INFO  c.l.s.interceptors.WebMvcCfgAdapter - 拦截器org.springframework.web.servlet.config.annotation.InterceptorRegistry@78422efb
+11:12:21.790 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+11:12:21.814 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+11:12:21.817 [main] INFO  c.l.s.SpringBootLearningApplication - Started SpringBootLearningApplication in 404.203 seconds (JVM running for 419.434)
+11:12:28.406 [Thread-37] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+16:58:55.181 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 18864 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+16:58:57.065 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default
+17:00:00.759 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+17:00:00.820 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+17:00:00.934 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+17:00:00.935 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+17:00:01.893 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:00:01.893 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 6560 ms
+17:00:35.684 [main] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+17:00:35.711 [main] INFO  c.l.s.interceptors.WebMvcCfgAdapter - 拦截器org.springframework.web.servlet.config.annotation.InterceptorRegistry@5a97b17c
+17:00:35.846 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+17:00:35.864 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+17:00:35.867 [main] INFO  c.l.s.SpringBootLearningApplication - Started SpringBootLearningApplication in 215.736 seconds (JVM running for 222.522)
+17:00:39.903 [Thread-34] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+17:00:59.466 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 10448 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+17:00:59.469 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default
+17:05:37.540 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+17:05:37.599 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+17:05:37.710 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+17:05:37.711 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+17:05:38.345 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:05:38.346 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 275063 ms
+17:06:13.686 [main] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+17:06:13.714 [main] INFO  c.l.s.interceptors.WebMvcCfgAdapter - 拦截器org.springframework.web.servlet.config.annotation.InterceptorRegistry@fd09e43
+17:06:13.851 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+17:06:13.868 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+17:06:13.871 [main] INFO  c.l.s.SpringBootLearningApplication - Started SpringBootLearningApplication in 327.115 seconds (JVM running for 329.304)
+17:06:26.569 [Thread-40] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+17:06:35.216 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 22828 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+17:06:35.218 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default
+17:06:37.836 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+17:06:37.852 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+17:06:37.860 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+17:06:37.860 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.17]
+17:06:37.963 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:06:37.963 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 958 ms
+17:06:38.354 [main] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+17:06:38.380 [main] INFO  c.l.s.interceptors.WebMvcCfgAdapter - 拦截器org.springframework.web.servlet.config.annotation.InterceptorRegistry@20ab76ee
+17:06:38.506 [main] INFO  o.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+17:06:38.522 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+17:06:38.525 [main] INFO  c.l.s.SpringBootLearningApplication - Started SpringBootLearningApplication in 6.849 seconds (JVM running for 9.717)
+17:08:15.501 [Thread-7] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+17:08:23.297 [main] INFO  c.l.s.SpringBootLearningApplication - Starting SpringBootLearningApplication on DESKTOP-5LURS2I with PID 11624 (E:\Github\SpringCloudLearning\DemoUserService\target\classes started by laofa in E:\Github\SpringCloudLearning)
+17:08:23.299 [main] INFO  c.l.s.SpringBootLearningApplication - No active profile set, falling back to default profiles: default

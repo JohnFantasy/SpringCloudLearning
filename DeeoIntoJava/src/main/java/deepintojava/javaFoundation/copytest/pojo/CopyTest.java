@@ -19,7 +19,5 @@ public class CopyTest {
         Person person1 = (Person) person.clone();
         System.out.println(person1.getName());
         System.out.println(person1.getMyCar());
-
-
     }
 }
