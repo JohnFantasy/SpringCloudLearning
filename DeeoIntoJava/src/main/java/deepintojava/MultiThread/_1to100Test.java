@@ -14,7 +14,7 @@ public class _1to100Test implements Runnable {
     static int i = 1;
 
     public static ReentrantLock lock = new ReentrantLock();
-    private static Condition condition = lock.newCondition();
+    private static final Condition condition = lock.newCondition();
 
 
     public static void main(String[] args) {

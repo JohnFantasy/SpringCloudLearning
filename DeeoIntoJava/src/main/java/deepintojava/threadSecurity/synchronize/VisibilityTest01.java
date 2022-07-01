@@ -11,12 +11,12 @@ public class VisibilityTest01 {
 
     private static boolean flag = true;
 
-    private static final Object obj = new Object();
+    private static final Object OBJ = new Object();
 
     public static void main(String[] args) throws InterruptedException {
         new Thread(() -> {
             while (flag) {
-                synchronized (obj){
+                synchronized (OBJ){
 
                 }
 //                System.out.println("Thread 1 read the value: " + flag);

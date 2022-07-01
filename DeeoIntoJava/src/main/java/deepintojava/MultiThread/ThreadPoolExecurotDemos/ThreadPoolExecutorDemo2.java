@@ -1,9 +1,6 @@
 package deepintojava.MultiThread.ThreadPoolExecurotDemos;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -11,10 +8,16 @@ public class ThreadPoolExecutorDemo2 {
 
     public static void main(String[] args) {
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
-                1,
-                1,
-                5L,
+                9,
+                10,
+                1L,
                 TimeUnit.SECONDS,
-                new ArrayBlockingQueue<Runnable>(5));
+                new ArrayBlockingQueue<>(100000),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+
+        for (int i = 0; i < 100000; i++) {
+            int finalI = i;
+            poolExecutor.execute(() -> System.out.println(Thread.currentThread().getName() + ":" + finalI));
+        }
     }
 }

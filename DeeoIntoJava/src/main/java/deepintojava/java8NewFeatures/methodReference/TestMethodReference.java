@@ -19,5 +19,7 @@ public class TestMethodReference {
     @Test
     public void test1() {
         Consumer<String> com = (x) -> System.out.println("x=" + x);
+
+        com.accept("hello");
     }
 }

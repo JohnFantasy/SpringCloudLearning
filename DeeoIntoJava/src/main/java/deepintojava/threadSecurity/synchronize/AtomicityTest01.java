@@ -19,9 +19,10 @@ public class AtomicityTest01 {
     public static void main(String[] args) throws InterruptedException {
         Runnable runnable = () -> {
             for (int i = 0; i < 1000; i++) {
-                synchronized (obj) {
-                    number++;
-                }
+//                synchronized (obj) {
+//                    number++;
+//                }
+                number++;
             }
         };
 //        for (int i = 0; i < 5; i++) {
