@@ -40,8 +40,8 @@ public class StreamTest1 {
 
         phones2.stream().map(item->item.setBrand("Nokia")).forEach(System.out::println);
 
-        Phone phone = phones2.stream().findFirst().get();
-        System.out.println(phone);
+        boolean phone = phones2.stream().filter(item->item.getBrand().equals("hahaha")).findFirst().isPresent();
+        System.out.println("================"+phone);
 
         Person person = new Person()
                 .setName("zhangsan")
