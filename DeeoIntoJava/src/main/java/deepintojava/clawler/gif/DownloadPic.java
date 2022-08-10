@@ -27,7 +27,8 @@ public class DownloadPic {
             String imageName = url.substring(url.lastIndexOf("/") + 1, url.length());
             CloseableHttpClient client = HttpClients.createDefault();
             HttpGet get = new HttpGet(url);
-            get.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.47");
+            get.setHeader("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
             get.setHeader("accept", "*/*");
             get.setHeader("accept-encoding", "gzip, deflate, br");
             CloseableHttpResponse response = client.execute(get);
