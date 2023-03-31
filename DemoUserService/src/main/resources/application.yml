@@ -18,6 +18,11 @@ spring:
     jedis:
       pool:
         max-active: 8
+        max-idle: 15000
+        min-idle: 14000
+        max-wait: 1000
+    password:
+    timeout: 1000
 
 
 # mybatis

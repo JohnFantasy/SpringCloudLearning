@@ -26,10 +26,8 @@ public class EasyExcelController {
 
     @RequestMapping(value = "exportExcel", method = RequestMethod.GET)
     public String exportOrderData(HttpServletResponse response) {
-
-
         easyExcelService.exportExcel(response);
-        return "exprt SUCCESS";
+        return "export SUCCESS";
     }
 
 

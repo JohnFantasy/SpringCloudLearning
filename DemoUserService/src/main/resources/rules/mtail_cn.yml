@@ -1,0 +1,13 @@
+groups:
+  - name: mtail
+    rules:
+      - alert: ErrorCountExceeds100
+        expr: sum by (job) (increase(error_count[5m])) > 100
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "5分钟内错误计数超过100"
+          description: "{{ $labels.job }}的错误计数在5分钟内为{{ $value }}。"
+          value: "{{ $value }}"

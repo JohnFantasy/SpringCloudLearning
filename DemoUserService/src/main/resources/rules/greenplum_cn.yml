@@ -1,0 +1,43 @@
+groups:
+  -name: greenplum
+  rules:
+    - alert: GPUnreachableError
+      expr: greenplum_cluster_state == 0
+      for: 1m
+      labels:
+        severity: critical
+        alertRuleId: 1
+      annotations:
+        summary: "GP不可用"
+        description: "GP不可用"
+        value: "{{ $value }}"
+    - alert: GPSyncError
+      expr: greenplum_cluster_sync == 0
+      for: 1m
+      labels:
+        severity: critical
+        alertRuleId: 1
+      annotations:
+        summary: "GP同步异常"
+        description: "GP同步异常"
+        value: "{{ $value }}"
+    - alert: SegmentException
+      expr: greenplum_node_segment_status == 0
+      for: 1m
+      labels:
+        severity: critical
+        alertRuleId: 1
+      annotations:
+        summary: "segment异常"
+        description: "segment异常"
+        value: "{{ $value }}"
+    - alert: HostRemainSpaceTooLow
+      expr: greenplum_node_segment_disk_free_mb_size == 0
+      for: 1m
+      labels:
+        severity: critical
+        alertRuleId: 1
+      annotations:
+        summary: "主机磁盘剩余空间不足10%"
+        description: "主机磁盘剩余空间不足10"
+        value: "{{ $value }}"

@@ -36,11 +36,12 @@ public class DemoController {
         double latitude = coornidate.getLatitude().setScale(5, RoundingMode.HALF_UP).doubleValue();
         System.out.println(longitude);
         String ret = CoordinateConvertion.wgs84togcj02(longitude, latitude);
-        BigDecimal lng = new BigDecimal(Double.parseDouble(ret.split(",")[0]));
-        BigDecimal lat = new BigDecimal(Double.parseDouble(ret.split(",")[1]));
+        BigDecimal lng = BigDecimal.valueOf(Double.parseDouble(ret.split(",")[0]));
+        BigDecimal lat = BigDecimal.valueOf(Double.parseDouble(ret.split(",")[1]));
         coornidate.setLongitude(lng);
-        StringBuffer sb = new StringBuffer("");
+        StringBuilder sb = new StringBuilder();
         sb.reverse();
+        System.out.println(sb);
         coornidate.setLatitude(lat);
         return coornidate;
     }

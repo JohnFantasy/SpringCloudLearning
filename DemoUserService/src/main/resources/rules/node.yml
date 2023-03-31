@@ -1,0 +1,108 @@
+groups:
+  -name: node
+  rules:
+    - alert: HostOutOfMemory
+      expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 1
+      annotations:
+        summary: 内存不足(实例{{ $labels.instance }})
+        description: "节点内存正在填充(<10%剩余)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostMemoryUnderMemoryPressure
+      expr: rate(node_vmstat_pgmajfault[1m]) > 1000
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 2
+      annotations:
+        summary: 主机内存压力过大(实例{{ $labels.instance }})
+        description: "节点正在承受严重的内存压力。主要页面故障率高\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    # 您可能需要将此类警报的“repeat_interval”增加到每日或每周
+    - alert: HostMemoryIsUnderUtilized
+      expr: 100 - (rate(node_memory_MemAvailable_bytes[30m]) / node_memory_MemTotal_bytes * 100) < 20
+      for: 1w
+      labels:
+        severity: info
+        alertRuleId: 3
+      annotations:
+        summary: 主机内存未充分利用(实例{{ $labels.instance }})
+        description: "节点内存<20%已达1周。考虑减少内存空间。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostUnusualNetworkThroughputIn
+      expr: sum by (instance) (rate(node_network_receive_bytes_total[2m])) / 1024 / 1024 > 100
+      for: 5m
+      labels:
+        severity: warning
+        alertRuleId: 4
+      annotations:
+        summary: 主机网络吞吐量异常（实例{{ $labels.instance }}）
+        description: "主机网络接口可能正在接收过多的数据（> 100 MB/s）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostUnusualNetworkThroughputOut
+      expr: sum by (instance) (rate(node_network_transmit_bytes_total[2m])) / 1024 / 1024 > 100
+      for: 5m
+      labels:
+        severity: warning
+        alertRuleId: 5
+      annotations:
+        summary: 主机网络吞吐量异常（实例{{ $labels.instance }}）
+        description: "主机网络接口可能正在发送过多的数据（> 100 MB/s）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostUnusualDiskReadRate
+      expr: sum by (instance) (rate(node_disk_read_bytes_total[2m])) / 1024 / 1024 > 50
+      for: 5m
+      labels:
+        severity: warning
+        alertRuleId: 6
+      annotations:
+        summary: 主机磁盘读取速率异常（实例{{ $labels.instance }}）
+        description: "磁盘可能正在读取过多的数据（> 50 MB/s）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostUnusualDiskWriteRate
+      expr: sum by (instance) (rate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 50
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 7
+      annotations:
+        summary: 主机磁盘写入速率异常（实例{{ $labels.instance }}）
+        description: "磁盘可能正在写入过多的数据（> 50 MB/s）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    # 请在node_exporter参数中添加忽略的挂载点，例如"--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)"。
+    # 使用"node_filesystem_free_bytes"的相同规则将在磁盘填充非根用户时触发。
+    - alert: HostOutOfDiskSpace
+      expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 8
+      annotations:
+        summary: 主机磁盘空间不足（实例{{ $labels.instance }}）
+        description: "磁盘空间几乎已满（<10%）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    # 请在node_exporter参数中添加忽略的挂载点，例如"--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)"。
+    # 使用"node_filesystem_free_bytes"的相同规则将在磁盘填充非根用户时触发。
+    - alert: HostDiskWillFillIn24Hours
+      expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs"}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 9
+      annotations:
+        summary: 主机磁盘将在24小时内填满（实例{{ $labels.instance }}）
+        description: "文件系统预计在当前写入速率下在接下来的24小时内用尽空间\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: HostOutOfInodes
+      expr: node_filesystem_files_free / node_filesystem_files * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 10
+      annotations:
+        summary: 主机的inode用尽了（实例{{ $labels.instance }}）
+      description: "磁盘可用的inode即将用尽（<10%）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      value: "{{ $value }}"

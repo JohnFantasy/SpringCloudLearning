@@ -1,0 +1,205 @@
+groups:
+  -name: postgres
+  rules:
+    - alert: PostgresqlDown
+      expr: pg_up == 0
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 1
+      annotations:
+        summary: PostgreSQL宕机（实例{{ $labels.instance }}）
+        description: "PostgreSQL实例已宕机\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlRestarted
+      expr: time() - pg_postmaster_start_time_seconds < 60
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 2
+      annotations:
+        summary: PostgreSQL重启（实例{{ $labels.instance }}）
+        description: "PostgreSQL已重启\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlExporterError
+      expr: pg_exporter_last_scrape_error > 0
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 3
+      annotations:
+        summary: PostgreSQL导出器错误（实例{{ $labels.instance }}）
+        description: "PostgreSQL导出器显示错误。查询可能在query.yaml中出错\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlTableNotAutoVacuumed
+      expr: (pg_stat_user_tables_last_autovacuum > 0) and (time() - pg_stat_user_tables_last_autovacuum) > 60 * 60 * 24 * 10
+      for: 0m
+      labels:
+        severity: warning
+        alertRuleId: 4
+      annotations:
+        summary: PostgreSQL表未自动清理（实例{{ $labels.instance }}）
+        description: "表{{ $labels.relname }}未自动清理10天\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlTableNotAutoAnalyzed
+      expr: (pg_stat_user_tables_last_autoanalyze > 0) and (time() - pg_stat_user_tables_last_autoanalyze) > 24 * 60 * 60 * 10
+      for: 0m
+      labels:
+        severity: warning
+        alertRuleId: 5
+      annotations:
+        summary: PostgreSQL表未自动分析（实例{{ $labels.instance }}）
+        description: "表{{ $labels.relname }}未自动分析10天\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlTooManyConnections
+      expr: sum by (datname) (pg_stat_activity_count{datname!~"template.*|postgres"}) > pg_settings_max_connections * 0.8
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 6
+      annotations:
+        summary: PostgreSQL连接过多（实例{{ $labels.instance }}）
+        description: "PostgreSQL实例连接过多（> 80%）。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlNotEnoughConnections
+      expr: sum by (datname) (pg_stat_activity_count{datname!~"template.*|postgres"}) < 5
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 7
+      annotations:
+        summary: PostgreSQL连接不足（实例{{ $labels.instance }}）
+        description: "PostgreSQL实例应该有更多的连接（> 5）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlDeadLocks
+      expr: increase(pg_stat_database_deadlocks{datname!~"template.*|postgres"}[1m]) > 5
+      for: 0m
+      labels:
+        severity: warning
+        alertRuleId: 8
+      annotations:
+        summary: PostgreSQL死锁（实例{{ $labels.instance }}）
+        description: "PostgreSQL有死锁\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlHighRollbackRate
+      expr: sum by (namespace,datname) ((rate(pg_stat_database_xact_rollback{datname!~"template.*|postgres",datid!="0"}[3m])) / ((rate(pg_stat_database_xact_rollback{datname!~"template.*|postgres",datid!="0"}[3m])) + (rate(pg_stat_database_xact_commit{datname!~"template.*|postgres",datid!="0"}[3m])))) > 0.02
+      for: 0m
+      labels:
+        severity: warning
+        alertRuleId: 9
+      annotations:
+        summary: PostgreSQL回滚率过高（实例{{ $labels.instance }}）
+        description: "中止事务与提交事务的比率> 2％\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlCommitRateLow
+      expr: rate(pg_stat_database_xact_commit[1m]) < 10
+      for: 2m
+      labels:
+        severity: critical
+        alertRuleId: 10
+      annotations:
+        summary: PostgreSQL提交率过低（实例{{ $labels.instance }}）
+        description: "PostgreSQL似乎正在处理很少的事务\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlLowXidConsumption
+      expr: rate(pg_txid_current[1m]) < 5
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 11
+      annotations:
+        summary: PostgreSQL XID消耗过低（实例{{ $labels.instance }}）
+        description: "PostgreSQL似乎非常缓慢地消耗事务ID\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlHighRateStatementTimeout
+      expr: rate(postgresql_errors_total{type="statement_timeout"}[1m]) > 3
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 12
+      annotations:
+        summary: PostgreSQL语句超时率过高（实例{{ $labels.instance }}）
+        description: "Postgres事务显示语句超时的高速率\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlHighRateDeadlock
+      expr: increase(postgresql_errors_total{type="deadlock_detected"}[1m]) > 1
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 13
+      annotations:
+        summary: PostgreSQL死锁率过高（实例{{ $labels.instance }}）
+        description: "Postgres检测到死锁\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlUnusedReplicationSlot
+      expr: pg_replication_slots_active == 0
+      for: 1m
+      labels:
+        severity: warning
+        alertRuleId: 14
+      annotations:
+        summary: PostgreSQL未使用的复制插槽（实例{{ $labels.instance }}）
+        description: "未使用的复制插槽\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlTooManyDeadTuples
+      expr: ((pg_stat_user_tables_n_dead_tup > 10000) / (pg_stat_user_tables_n_live_tup + pg_stat_user_tables_n_dead_tup)) >= 0.1
+      for: 2m
+      labels:
+        severity: warning
+        alertRuleId: 15
+      annotations:
+        summary: PostgreSQL死元组过多（实例{{ $labels.instance }}）
+        description: "PostgreSQL死元组太多\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlConfigurationChanged
+      expr: {__name__=~"pg_settings_.*"} != ON(__name__) {__name__=~"pg_settings_([^t]|t[^r]|tr[^a]|tra[^n]|tran[^s]|trans[^a]|transa[^c]|transac[^t]|transact[^i]|transacti[^o]|transactio[^n]|transaction[^_]|transaction_[^r]|transaction_r[^e]|transaction_re[^a]|transaction_rea[^d]|transaction_read[^_]|transaction_read_[^o]|transaction_read_o[^n]|transaction_read_on[^l]|transaction_read_onl[^y]).*"} OFFSET 5m
+      for: 0m
+      labels:
+        severity: info
+        alertRuleId: 16
+      annotations:
+        summary: PostgreSQL配置更改（实例{{ $labels.instance }}）
+        description: "Postgres数据库配置更改已发生\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlSslCompressionActive
+      expr: sum(pg_stat_ssl_compression) > 0
+      for: 0m
+      labels:
+        severity: critical
+        alertRuleId: 17
+      annotations:
+        summary: PostgreSQL SSL压缩已激活（实例{{ $labels.instance }}）
+        description: "启用了带有SSL压缩的数据库连接。这可能会在复制延迟中添加显着的抖动。副本应通过`recovery.conf`中的`sslcompression = 0`关闭SSL压缩。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    - alert: PostgresqlTooManyLocksAcquired
+      expr: ((sum (pg_locks_count)) / (pg_settings_max_locks_per_transaction * pg_settings_max_connections)) > 0.20
+      for: 2m
+      labels:
+        severity: critical
+        alertRuleId: 18
+      annotations:
+        summary: PostgreSQL获取的锁过多（实例{{ $labels.instance }}）
+        description: "数据库上获取的锁过多。如果此警报经常发生，我们可能需要增加postgres设置max_locks_per_transaction。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    # See https://github.com/samber/awesome-prometheus-alerts/issues/289#issuecomment-1164842737
+    - alert: PostgresqlBloatIndexHigh(>80%)
+      expr: pg_bloat_btree_bloat_pct > 80 and on (idxname) (pg_bloat_btree_real_size > 100000000)
+      for: 1h
+      labels:
+        severity: warning
+        alertRuleId: 19
+      annotations:
+        summary: PostgreSQL膨胀索引过高（> 80％）（实例{{ $labels.instance }}）
+        description: "索引{{ $labels.idxname }}已膨胀。您应该执行`REINDEX INDEX CONCURRENTLY {{ $labels.idxname }};`\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+    # See https://github.com/samber/awesome-prometheus-alerts/issues/289#issuecomment-1164842737
+    - alert: PostgresqlBloatTableHigh(>80%)
+      expr: pg_bloat_table_bloat_pct > 80 and on (relname) (pg_bloat_table_real_size > 200000000)
+      for: 1h
+      labels:
+        severity: warning
+        alertRuleId: 20
+      annotations:
+        summary: PostgreSQL膨胀表过高（> 80％）（实例{{ $labels.instance }}）
+        description: "表{{ $labels.relname }}已膨胀。您应该执行`VACUUM {{ $labels.relname }};`\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"

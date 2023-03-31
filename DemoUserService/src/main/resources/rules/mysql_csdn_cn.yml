@@ -1,0 +1,243 @@
+groups:
+  - name: MySQLStatsAlert
+    rules:
+      - alert: MySQL is down
+        expr: mysql_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "实例 {{ $labels.instance }} MySQL已停止"
+          description: "MySQL数据库已停止。这需要立即采取行动！"
+          value: "{{ $value }}"
+      - alert: open files high
+        expr: mysql_global_status_innodb_num_open_files > (mysql_global_variables_open_files_limit) * 0.75
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 2
+        annotations:
+          summary: "实例 {{ $labels.instance }} 打开的文件过多"
+          description: "打开的文件过多。请考虑增加open_files_limit。"
+          value: "{{ $value }}"
+      - alert: Read buffer size is bigger than max. allowed packet size
+        expr: mysql_global_variables_read_buffer_size > mysql_global_variables_slave_max_allowed_packet
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 3
+        annotations:
+          summary: "实例 {{ $labels.instance }} 读取缓冲区大小大于最大允许的数据包大小"
+          description: "读取缓冲区大小（read_buffer_size）大于最大允许的数据包大小（max_allowed_packet）。这可能会破坏您的复制。"
+          value: "{{ $value }}"
+      - alert: Sort buffer possibly missconfigured
+        expr: mysql_global_variables_innodb_sort_buffer_size <256*1024 or mysql_global_variables_read_buffer_size > 4*1024*1024
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 4
+        annotations:
+          summary: "实例 {{ $labels.instance }} 排序缓冲区可能配置错误"
+          description: "排序缓冲区大小太大或太小。sort_buffer_size的良好值在256k和4M之间。"
+          value: "{{ $value }}"
+      - alert: Thread stack size is too small
+        expr: mysql_global_variables_thread_stack <196608
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 5
+        annotations:
+          summary: "实例 {{ $labels.instance }} 线程堆栈大小太小"
+          description: "线程堆栈大小太小。例如，当您使用存储语言结构时，这可能会导致问题。线程堆栈大小的典型值为256k。"
+          value: "{{ $value }}"
+      - alert: Used more than 80% of max connections limited
+        expr: mysql_global_status_max_used_connections > mysql_global_variables_max_connections * 0.8
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 6
+        annotations:
+          summary: "实例 {{ $labels.instance }} 使用的连接数超过最大连接数的80％"
+          description: "使用的连接数超过了最大连接数的80％"
+          value: "{{ $value }}"
+      - alert: InnoDB Force Recovery is enabled
+        expr: mysql_global_variables_innodb_force_recovery != 0
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 7
+        annotations:
+          summary: "实例 {{ $labels.instance }} 启用了InnoDB Force Recovery"
+          description: "启用了InnoDB Force Recovery。此模式仅应用于数据恢复目的。它禁止向数据写入。"
+          value: "{{ $value }}"
+      - alert: InnoDB Log File size is too small
+        expr: mysql_global_variables_innodb_log_file_size < 16777216
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 8
+        annotations:
+          summary: "实例 {{ $labels.instance }} InnoDB日志文件大小太小"
+          description: "InnoDB日志文件大小可能太小。选择小的InnoDB日志文件大小可能会对性能产生重大影响。"
+          value: "{{ $value }}"
+      - alert: InnoDB Flush Log at Transaction Commit
+        expr: mysql_global_variables_innodb_flush_log_at_trx_commit != 1
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 9
+        annotations:
+          summary: "实例 {{ $labels.instance }} InnoDB在事务提交时刷新日志"
+          description: "InnoDB在事务提交时刷新日志设置为值！= 1。这可能会导致电源故障时提交的事务丢失。"
+          value: "{{ $value }}"
+      - alert: Table definition cache too small
+        expr: mysql_global_status_open_table_definitions > mysql_global_variables_table_definition_cache
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 10
+        annotations:
+          summary: "实例 {{ $labels.instance }} 表定义缓存太小"
+          description: "您的表定义缓存可能太小。如果太小，这可能会对性能产生重大影响！"
+          value: "{{ $value }}"
+      - alert: Table open cache too small
+        expr: mysql_global_status_open_tables >mysql_global_variables_table_open_cache * 99/100
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 11
+        annotations:
+          summary: "实例 {{ $labels.instance }} 表打开缓存太小"
+          description: "您的表打开缓存可能太小（旧名称为表缓存）。如果太小，这可能会对性能产生重大影响！"
+          value: "{{ $value }}"
+      - alert: Thread stack size is possibly too small
+        expr: mysql_global_variables_thread_stack < 262144
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 12
+        annotations:
+          summary: "实例 {{ $labels.instance }} 线程堆栈大小可能太小"
+          description: "线程堆栈大小可能太小。例如，当您使用存储语言结构时，这可能会导致问题。线程堆栈大小的典型值为256k。"
+          value: "{{ $value }}"
+      - alert: InnoDB Buffer Pool Instances is too small
+        expr: mysql_global_variables_innodb_buffer_pool_instances == 1
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 13
+        annotations:
+          summary: "实例 {{ $labels.instance }} InnoDB缓冲池实例太小"
+          description: "如果您使用的是MySQL 5.5及更高版本，则应出于性能原因使用多个InnoDB缓冲池实例。一些规则是：InnoDB缓冲池实例的大小应至少为1 Gbyte。您可以将InnoDB缓冲池实例设置为机器的核心数。"
+          value: "{{ $value }}"
+      - alert: InnoDB Plugin is enabled
+        expr: mysql_global_variables_ignore_builtin_innodb == 1
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 14
+        annotations:
+          summary: "实例 {{ $labels.instance }} 启用了InnoDB插件"
+          description: "启用了InnoDB插件"
+          value: "{{ $value }}"
+      - alert: Binary Log is disabled
+        expr: mysql_global_variables_log_bin != 1
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 15
+        annotations:
+          summary: "实例 {{ $labels.instance }} 二进制日志已禁用"
+          description: "二进制日志已禁用。这会禁止您进行时间点恢复（PiTR）。"
+          value: "{{ $value }}"
+      - alert: Binlog Cache size too small
+        expr: mysql_global_variables_binlog_cache_size < 1048576
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 16
+        annotations:
+          summary: "实例 {{ $labels.instance }} Binlog缓存大小太小"
+          description: "Binlog缓存大小可能太小。1 M字节或更高的值是可以的。"
+          value: "{{ $value }}"
+      - alert: Binlog Statement Cache size too small
+        expr: mysql_global_variables_binlog_stmt_cache_size <1048576 and mysql_global_variables_binlog_stmt_cache_size > 0
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 17
+        annotations:
+          summary: "实例 {{ $labels.instance }} Binlog语句缓存大小太小"
+          description: "Binlog语句缓存大小可能太小。1 M字节或更高的值通常是可以的。"
+          value: "{{ $value }}"
+      - alert: Binlog Transaction Cache size too small
+        expr: mysql_global_variables_binlog_cache_size  <1048576
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 18
+        annotations:
+          summary: "实例 {{ $labels.instance }} Binlog事务缓存大小太小"
+          description: "Binlog事务缓存大小可能太小。1 M字节或更高的值通常是可以的。"
+          value: "{{ $value }}"
+      - alert: Sync Binlog is enabled
+        expr: mysql_global_variables_sync_binlog == 1
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 19
+        annotations:
+          summary: "实例 {{ $labels.instance }} 启用了Sync Binlog"
+          description: "启用了Sync Binlog。这会导致更高的数据安全性，但会降低写入性能。"
+          value: "{{ $value }}"
+      - alert: IO thread stopped
+        expr: mysql_slave_status_slave_io_running != 1
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 20
+        annotations:
+          summary: "实例 {{ $labels.instance }} IO线程已停止"
+          description: "IO线程已停止。这通常是因为它无法再连接到主服务器。"
+          value: "{{ $value }}"
+      - alert: SQL thread stopped
+        expr: mysql_slave_status_slave_sql_running == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 21
+        annotations:
+          summary: "实例 {{ $labels.instance }} SQL线程已停止"
+          description: "SQL线程已停止。这通常是因为它无法应用从主服务器接收到的SQL语句。"
+          value: "{{ $value }}"
+      - alert: SQL thread stopped
+        expr: mysql_slave_status_slave_sql_running != 1
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 22
+        annotations:
+          summary: "实例 {{ $labels.instance }} SQL线程已停止"
+          description: "SQL线程已停止。这通常是因为它无法应用从主服务器接收到的SQL语句。"
+          value: "{{ $value }}"
+      - alert: Slave lagging behind Master
+        expr: rate(mysql_slave_status_seconds_behind_master[1m]) >30
+        for: 1m
+        labels:
+          severity: warning
+          alertRuleId: 23
+        annotations:
+          summary: "实例 {{ $labels.instance }} 从服务器落后于主服务器"
+          description: "从服务器落后于主服务器。请检查从服务器线程是否正在运行以及是否存在某些性能问题！"
+          value: "{{ $value }}"
+      - alert: Slave is NOT read only(Please ignore this warning indicator.)
+        expr: mysql_global_variables_read_only != 0
+        for: 1m
+        labels:
+          severity: page
+          alertRuleId: 24
+        annotations:
+          summary: "实例 {{ $labels.instance }} 从服务器未设置为只读"
+          description: "从服务器未设置为只读。您可能会意外操纵从服务器上的数据并获得不一致性..."
+          value: "{{ $value }}"
