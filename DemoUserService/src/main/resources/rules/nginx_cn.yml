@@ -1,34 +1,33 @@
 groups:
-
-  -name: nginx
-  rules:
-    - alert: NginxHighHttp4xxErrorRate
-      expr: sum(rate(nginx_http_requests_total{status=~"^4.."}[1m])) / sum(rate(nginx_http_requests_total[1m])) * 100 > 5
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: Nginx高HTTP 4xx错误率（实例{{ $labels.instance }}）
-        description: "状态为4xx的HTTP请求过多（> 5％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: NginxHighHttp5xxErrorRate
-      expr: sum(rate(nginx_http_requests_total{status=~"^5.."}[1m])) / sum(rate(nginx_http_requests_total[1m)) * 100 > 5
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 2
-      annotations:
-        summary: Nginx高HTTP 5xx错误率（实例{{ $labels.instance }}）
-        description: "状态为5xx的HTTP请求过多（> 5％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: NginxLatencyHigh
-      expr: histogram_quantile(0.99, sum(rate(nginx_http_request_duration_seconds_bucket[2m])) by (host, node)) > 3
-      for: 2m
-      labels:
-        severity: warning
-        alertRuleId: 3
-      annotations:
-        summary: Nginx延迟高（实例{{ $labels.instance }}）
-        description: "Nginx p99延迟高于3秒\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
+  - name: nginx
+    rules:
+      - alert: NginxHighHttp4xxErrorRate
+        expr: sum(rate(nginx_http_requests_total{status=~"^4.."}[1m])) / sum(rate(nginx_http_requests_total[1m])) * 100 > 5
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: Nginx高HTTP 4xx错误率（实例{{ $labels.instance }}）
+          description: "状态为4xx的HTTP请求过多（> 5％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: NginxHighHttp5xxErrorRate
+        expr: sum(rate(nginx_http_requests_total{status=~"^5.."}[1m])) / sum(rate(nginx_http_requests_total[1m)) * 100 > 5
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 2
+        annotations:
+          summary: Nginx高HTTP 5xx错误率（实例{{ $labels.instance }}）
+          description: "状态为5xx的HTTP请求过多（> 5％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: NginxLatencyHigh
+        expr: histogram_quantile(0.99, sum(rate(nginx_http_request_duration_seconds_bucket[2m])) by (host, node)) > 3
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 3
+        annotations:
+          summary: Nginx延迟高（实例{{ $labels.instance }}）
+          description: "Nginx p99延迟高于3秒\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"

@@ -1,43 +1,43 @@
 groups:
-  -name: greenplum
-  rules:
-    - alert: GPUnreachableError
-      expr: greenplum_cluster_state == 0
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: "GP unavailable"
-        description: "GP unavailable"
-        value: "{{ $value }}"
-    - alert: GPSyncError
-      expr: greenplum_cluster_sync == 0
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: "GP sync error"
-        description: "GP sync error"
-        value: "{{ $value }}"
-    - alert: SegmentException
-      expr: greenplum_node_segment_status == 0
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: "segment exception"
-        description: "segment exception"
-        value: "{{ $value }}"
-    - alert: HostRemainSpaceTooLow
-      expr: greenplum_node_segment_disk_free_mb_size == 0
-      for: 1m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: "Host remaining disk space less than 10%"
-        description: "Host remaining disk space less than 10%"
-        value: "{{ $value }}"
+  - name: greenplum
+    rules:
+      - alert: GPUnreachableError
+        expr: greenplum_cluster_state == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "GP unavailable"
+          description: "GP unavailable"
+          value: "{{ $value }}"
+      - alert: GPSyncError
+        expr: greenplum_cluster_sync == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "GP sync error"
+          description: "GP sync error"
+          value: "{{ $value }}"
+      - alert: SegmentException
+        expr: greenplum_node_segment_status == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "segment exception"
+          description: "segment exception"
+          value: "{{ $value }}"
+      - alert: HostRemainSpaceTooLow
+        expr: greenplum_node_segment_disk_free_mb_size == 0
+        for: 1m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: "Host remaining disk space less than 10%"
+          description: "Host remaining disk space less than 10%"
+          value: "{{ $value }}"

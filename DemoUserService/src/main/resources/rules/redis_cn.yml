@@ -1,124 +1,124 @@
 groups:
-  -name: redis
-  rules:
-    - alert: RedisDown
-      expr: redis_up == 0
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 1
-      annotations:
-        summary: Redis宕机（实例{{ $labels.instance }}）
-        description: "Redis实例已宕机\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisMissingMaster
-      expr: (count(redis_instance_info{role="master"}) or vector(0)) < 1
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 2
-      annotations:
-        summary: Redis缺少主节点（实例{{ $labels.instance }}）
-        description: "Redis集群没有标记为主节点的节点。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisTooManyMasters
-      expr: count(redis_instance_info{role="master"}) > 1
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 3
-      annotations:
-        summary: Redis主节点过多（实例{{ $labels.instance }}）
-        description: "Redis集群有太多标记为主节点的节点。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisDisconnectedSlaves
-      expr: count without (instance, job) (redis_connected_slaves) - sum without (instance, job) (redis_connected_slaves) - 1 > 1
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 4
-      annotations:
-        summary: Redis从节点断开连接（实例{{ $labels.instance }}）
-        description: "Redis未为所有从节点复制。考虑查看redis复制状态。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisReplicationBroken
-      expr: delta(redis_connected_slaves[1m]) < 0
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 5
-      annotations:
-        summary: Redis复制中断（实例{{ $labels.instance }}）
-        description: "Redis实例丢失一个从节点\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisClusterFlapping
-      expr: changes(redis_connected_slaves[1m]) > 1
-      for: 2m
-      labels:
-        severity: critical
-        alertRuleId: 6
-      annotations:
-        summary: Redis集群抖动（实例{{ $labels.instance }}）
-        description: "在Redis副本连接中检测到更改。当副本节点失去与主节点的连接并重新连接时，可能会发生这种情况（也称为抖动）。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisMissingBackup
-      expr: time() - redis_rdb_last_save_timestamp_seconds > 60 * 60 * 24
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 7
-      annotations:
-        summary: Redis缺少备份（实例{{ $labels.instance }}）
-        description: "Redis已经24小时没有备份\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    # The exporter must be started with --include-system-metrics flag or REDIS_EXPORTER_INCL_SYSTEM_METRICS=true environment variable.
-    - alert: RedisOutOfSystemMemory
-      expr: redis_memory_used_bytes / redis_total_system_memory_bytes * 100 > 90
-      for: 2m
-      labels:
-        severity: warning
-        alertRuleId: 8
-      annotations:
-        summary: Redis系统内存不足（实例{{ $labels.instance }}）
-        description: "Redis即将用尽系统内存（> 90％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisOutOfConfiguredMaxmemory
-      expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 90
-      for: 2m
-      labels:
-        severity: warning
-        alertRuleId: 9
-      annotations:
-        summary: Redis配置的最大内存不足（实例{{ $labels.instance }}）
-        description: "Redis即将用尽配置的最大内存（> 90％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisTooManyConnections
-      expr: redis_connected_clients > 100
-      for: 2m
-      labels:
-        severity: warning
-        alertRuleId: 10
-      annotations:
-        summary: Redis连接过多（实例{{ $labels.instance }}）
-        description: "Redis实例连接过多\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisNotEnoughConnections
-      expr: redis_connected_clients < 5
-      for: 2m
-      labels:
-        severity: warning
-        alertRuleId: 11
-      annotations:
-        summary: Redis连接不足（实例{{ $labels.instance }}）
-        description: "Redis实例应该有更多的连接（> 5）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
-    - alert: RedisRejectedConnections
-      expr: increase(redis_rejected_connections_total[1m]) > 0
-      for: 0m
-      labels:
-        severity: critical
-        alertRuleId: 12
-      annotations:
-        summary: Redis拒绝连接（实例{{ $labels.instance }}）
-        description: "Redis的一些连接已被拒绝\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-        value: "{{ $value }}"
+  - name: redis
+    rules:
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 1
+        annotations:
+          summary: Redis宕机（实例{{ $labels.instance }}）
+          description: "Redis实例已宕机\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisMissingMaster
+        expr: (count(redis_instance_info{role="master"}) or vector(0)) < 1
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 2
+        annotations:
+          summary: Redis缺少主节点（实例{{ $labels.instance }}）
+          description: "Redis集群没有标记为主节点的节点。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisTooManyMasters
+        expr: count(redis_instance_info{role="master"}) > 1
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 3
+        annotations:
+          summary: Redis主节点过多（实例{{ $labels.instance }}）
+          description: "Redis集群有太多标记为主节点的节点。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisDisconnectedSlaves
+        expr: count without (instance, job) (redis_connected_slaves) - sum without (instance, job) (redis_connected_slaves) - 1 > 1
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 4
+        annotations:
+          summary: Redis从节点断开连接（实例{{ $labels.instance }}）
+          description: "Redis未为所有从节点复制。考虑查看redis复制状态。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisReplicationBroken
+        expr: delta(redis_connected_slaves[1m]) < 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 5
+        annotations:
+          summary: Redis复制中断（实例{{ $labels.instance }}）
+          description: "Redis实例丢失一个从节点\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisClusterFlapping
+        expr: changes(redis_connected_slaves[1m]) > 1
+        for: 2m
+        labels:
+          severity: critical
+          alertRuleId: 6
+        annotations:
+          summary: Redis集群抖动（实例{{ $labels.instance }}）
+          description: "在Redis副本连接中检测到更改。当副本节点失去与主节点的连接并重新连接时，可能会发生这种情况（也称为抖动）。\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisMissingBackup
+        expr: time() - redis_rdb_last_save_timestamp_seconds > 60 * 60 * 24
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 7
+        annotations:
+          summary: Redis缺少备份（实例{{ $labels.instance }}）
+          description: "Redis已经24小时没有备份\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      # The exporter must be started with --include-system-metrics flag or REDIS_EXPORTER_INCL_SYSTEM_METRICS=true environment variable.
+      - alert: RedisOutOfSystemMemory
+        expr: redis_memory_used_bytes / redis_total_system_memory_bytes * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 8
+        annotations:
+          summary: Redis系统内存不足（实例{{ $labels.instance }}）
+          description: "Redis即将用尽系统内存（> 90％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisOutOfConfiguredMaxmemory
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 9
+        annotations:
+          summary: Redis配置的最大内存不足（实例{{ $labels.instance }}）
+          description: "Redis即将用尽配置的最大内存（> 90％）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisTooManyConnections
+        expr: redis_connected_clients > 100
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 10
+        annotations:
+          summary: Redis连接过多（实例{{ $labels.instance }}）
+          description: "Redis实例连接过多\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisNotEnoughConnections
+        expr: redis_connected_clients < 5
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 11
+        annotations:
+          summary: Redis连接不足（实例{{ $labels.instance }}）
+          description: "Redis实例应该有更多的连接（> 5）\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: RedisRejectedConnections
+        expr: increase(redis_rejected_connections_total[1m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 12
+        annotations:
+          summary: Redis拒绝连接（实例{{ $labels.instance }}）
+          description: "Redis的一些连接已被拒绝\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
