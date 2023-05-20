@@ -1,12 +1,17 @@
 package com.laofaner.springboot.controller.easyexcel;
 
+import cn.hutool.core.date.DateUtil;
 import com.laofaner.springboot.service.easyexcel.EasyExcelService;
+import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @BelongsProject: SpringBoot&SpringCloud
@@ -21,8 +26,23 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "easyexcel")
 public class EasyExcelController {
 
-    @Autowired
-    private EasyExcelService easyExcelService;
+    private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd");
+        }
+    };
+
+    public void test() {
+        String format = DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss");
+        System.out.println(format);
+    }
+
+    private final EasyExcelService easyExcelService;
+
+    public EasyExcelController(EasyExcelService easyExcelService) {
+        this.easyExcelService = easyExcelService;
+    }
 
     @RequestMapping(value = "exportExcel", method = RequestMethod.GET)
     public String exportOrderData(HttpServletResponse response) {
