@@ -1,0 +1,238 @@
+groups:
+  - name: node
+    rules:
+      - alert: HostOutOfMemory
+        expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 4
+        annotations:
+          summary: Host out of memory (instance {{ $labels.instance }})
+          description: "Node memory is filling up (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostMemoryUnderMemoryPressure
+        expr: rate(node_vmstat_pgmajfault[1m]) > 1000
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 5
+        annotations:
+          summary: Host memory under memory pressure (instance {{ $labels.instance }})
+          description: "The node is under heavy memory pressure. High rate of major page faults\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      # 您可能需要将此类警报的“repeat_interval”增加到每日或每周
+      - alert: HostMemoryIsUnderUtilized
+        expr: 100 - (rate(node_memory_MemAvailable_bytes[30m]) / node_memory_MemTotal_bytes * 100) < 20
+        for: 1w
+        labels:
+          severity: info
+          alertRuleId: 6
+        annotations:
+          summary: Host Memory is under utilized (instance {{ $labels.instance }})
+          description: "Node memory is < 20% for 1 week. Consider reducing memory space.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostUnusualNetworkThroughputIn
+        expr: sum by (instance) (rate(node_network_receive_bytes_total[2m])) / 1024 / 1024 > 100
+        for: 5m
+        labels:
+          severity: warning
+          alertRuleId: 7
+        annotations:
+          summary: Host unusual network throughput in (instance {{ $labels.instance }})
+          description: "Host network interfaces are probably receiving too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostUnusualNetworkThroughputOut
+        expr: sum by (instance) (rate(node_network_transmit_bytes_total[2m])) / 1024 / 1024 > 100
+        for: 5m
+        labels:
+          severity: warning
+          alertRuleId: 8
+        annotations:
+          summary: Host unusual network throughput out (instance {{ $labels.instance }})
+          description: "Host network interfaces are probably sending too much data (> 100 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostUnusualDiskReadRate
+        expr: sum by (instance) (rate(node_disk_read_bytes_total[2m])) / 1024 / 1024 > 50
+        for: 5m
+        labels:
+          severity: warning
+          alertRuleId: 9
+        annotations:
+          summary: Host unusual disk read rate (instance {{ $labels.instance }})
+          description: "Disk is probably reading too much data (> 50 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostUnusualDiskWriteRate
+        expr: sum by (instance) (rate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 50
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 10
+        annotations:
+          summary: Host unusual disk write rate (instance {{ $labels.instance }})
+          description: "Disk is probably writing too much data (> 50 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      # 请在node_exporter参数中添加忽略的挂载点，例如"--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)"。
+      # 使用"node_filesystem_free_bytes"的相同规则将在磁盘填充非根用户时触发。
+      - alert: HostOutOfDiskSpace
+        expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 11
+        annotations:
+          summary: Host out of disk space (instance {{ $labels.instance }})
+          description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      # 请在node_exporter参数中添加忽略的挂载点，例如"--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)"。
+      # 使用"node_filesystem_free_bytes"的相同规则将在磁盘填充非根用户时触发。
+      - alert: HostDiskWillFillIn24Hours
+        expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs"}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 12
+        annotations:
+          summary: Host disk will fill in 24 hours (instance {{ $labels.instance }})
+          description: "Filesystem is predicted to run out of space within the next 24 hours at current write rate\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HostOutOfInodes
+        expr: node_filesystem_files_free / node_filesystem_files * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+        for: 2m
+        labels:
+          severity: warning
+          alertRuleId: 13
+        annotations:
+          summary: Host out of inodes (instance {{ $labels.instance }})
+        description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        value: "{{ $value }}"
+      - alert: NginxHighConnections
+        expr: nginx_connections_accepted > 2000
+        for: 5m
+        labels:
+          severity: warning
+          alertRuleId: 54
+        annotations:
+          summary: '"High Nginx accepted connections"'
+          description: '"The number of accepted connections for Nginx has been over 2000 for the past 5 minutes."'
+          value: "{{ $value }}"
+      - alert: NginxDown
+        expr: nginx_up == 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 55
+        annotations:
+          summary: '"High Nginx accepted connections"'
+          description: '"The number of accepted connections for Nginx has been over 2000 for the past 5 minutes."'
+          value: "{{ $value }}"
+      - alert: ElasticsearchHeapUsageTooHigh
+        expr: (elasticsearch_jvm_memory_used_bytes{area="heap"} / elasticsearch_jvm_memory_max_bytes{area="heap"}) * 100 > 90
+        for: 2m
+        labels:
+          severity: critical
+          alertRuleId: 56
+        annotations:
+          summary: Elasticsearch Heap Usage Too High (instance {{ $labels.instance }})
+          description: "The heap usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchDiskOutOfSpace
+        expr: elasticsearch_filesystem_data_available_bytes / elasticsearch_filesystem_data_size_bytes * 100 < 10
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 57
+        annotations:
+          summary: Elasticsearch disk out of space (instance {{ $labels.instance }})
+          description: "The disk usage is over 90%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchClusterRed
+        expr: elasticsearch_cluster_health_status{color="red"} == 1
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 58
+        annotations:
+          summary: Elasticsearch Cluster Red (instance {{ $labels.instance }})
+          description: "Elastic Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchClusterYellow
+        expr: elasticsearch_cluster_health_status{color="yellow"} == 1
+        for: 0m
+        labels:
+          severity: warning
+          alertRuleId: 59
+        annotations:
+          summary: Elasticsearch Cluster Yellow (instance {{ $labels.instance }})
+          description: "Elastic Cluster Yellow status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchHealthyNodes
+        expr: elasticsearch_cluster_health_number_of_nodes < 3
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 60
+        annotations:
+          summary: Elasticsearch Healthy Nodes (instance {{ $labels.instance }})
+          description: "Missing node in Elasticsearch cluster\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchRelocatingShardsTooLong
+        expr: elasticsearch_cluster_health_relocating_shards > 0
+        for: 15m
+        labels:
+          severity: warning
+          alertRuleId: 61
+        annotations:
+          summary: Elasticsearch relocating shards too long (instance {{ $labels.instance }})
+          description: "Elasticsearch has been relocating shards for 15min\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: ElasticsearchPendingTasks
+        expr: elasticsearch_cluster_health_number_of_pending_tasks > 0
+        for: 15m
+        labels:
+          severity: warning
+          alertRuleId: 62
+        annotations:
+          summary: Elasticsearch pending tasks (instance {{ $labels.instance }})
+          description: "Elasticsearch has pending tasks. Cluster works slowly.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          value: "{{ $value }}"
+      - alert: HbaseMasterDown
+        expr: hbase_master_status{state="0"} > 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 63
+        annotations:
+          summary: Hbase master down
+          description: "Hbase master down"
+          value: "{{ $value }}"
+      - alert: HbaseRegionServerDown
+        expr: hbase_start_status{state="0"} > 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 64
+        annotations:
+          summary: Hbase region server(s) down
+          description: "Hbase region server(s) down"
+          value: "{{ $value }}"
+      - alert: YarnNodeDown
+        expr: Hadoop_ResourceManager_NumUnhealthyNMs > 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 65
+        annotations:
+          summary: Yarn NodeManager(s) unhealthy
+          description: "Yarn NodeManager unhealthy"
+          value: "{{ $value }}"
+      - alert: YarnNodeLost
+        expr: Hadoop_ResourceManager_NumLostNMs > 0
+        for: 0m
+        labels:
+          severity: critical
+          alertRuleId: 66
+        annotations:
+          summary: Yarn NodeManager(s) lost
+          description: "Yarn NodeManager lost"
+          value: "{{ $value }}"
