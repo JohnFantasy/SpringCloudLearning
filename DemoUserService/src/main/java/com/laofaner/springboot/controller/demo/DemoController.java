@@ -59,4 +59,11 @@ public class DemoController {
         Word2Pdf.word2Pdf();
         return "SUCCESS";
     }
+
+    @GetMapping("/test")
+    public String test1() throws InterruptedException {
+        Thread.sleep(2000L);
+        return "SUCCESS";
+    }
+
 }
