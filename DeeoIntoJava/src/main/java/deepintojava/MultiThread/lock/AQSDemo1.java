@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author fanyuzhuo
  * @createAt 2021-01-31 12:15
- * @description
+ * @description ReentrantLock可重入性用例
  */
 public class AQSDemo1 {
 

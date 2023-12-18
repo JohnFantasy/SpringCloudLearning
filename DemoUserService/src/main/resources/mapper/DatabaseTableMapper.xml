@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laofaner.database.mapper.DatabaseTableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.laofaner.database.entity.DatabaseTable">
+        <id column="id" property="id" />
+        <result column="table_name" property="tableName" />
+        <result column="table_type" property="tableType" />
+        <result column="indexed" property="indexed" />
+        <result column="index_field" property="indexField" />
+        <result column="partition_field" property="partitionField" />
+        <result column="partition_cycle" property="partitionCycle" />
+        <result column="partition_format" property="partitionFormat" />
+        <result column="pre_build_partition" property="preBuildPartition" />
+        <result column="division_cycle" property="divisionCycle" />
+        <result column="division_format" property="divisionFormat" />
+        <result column="pre_build_division" property="preBuildDivision" />
+        <result column="access_status" property="accessStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+</mapper>

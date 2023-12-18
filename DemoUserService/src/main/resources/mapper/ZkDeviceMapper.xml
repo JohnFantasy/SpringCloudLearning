@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laofaner.zk.mapper.ZkDeviceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.laofaner.zk.entity.ZkDevice">
+        <id column="id" property="id" />
+        <result column="device_id" property="deviceId" />
+        <result column="device_name" property="deviceName" />
+        <result column="device_ip" property="deviceIp" />
+        <result column="device_type" property="deviceType" />
+        <result column="device_vendor" property="deviceVendor" />
+        <result column="device_desc" property="deviceDesc" />
+        <result column="device_modele_number" property="deviceModeleNumber" />
+        <result column="device_software_version" property="deviceSoftwareVersion" />
+        <result column="create_time" property="createTime" />
+        <result column="reserved1" property="reserved1" />
+        <result column="reserved2" property="reserved2" />
+        <result column="reserved3" property="reserved3" />
+    </resultMap>
+
+</mapper>

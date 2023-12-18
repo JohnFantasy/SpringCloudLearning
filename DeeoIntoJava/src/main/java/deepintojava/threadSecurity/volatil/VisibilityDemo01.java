@@ -30,7 +30,7 @@ public class VisibilityDemo01 {
 
 class MyThread extends Thread {
 
-    private boolean flag = false;
+    private volatile boolean flag = false;
 
     @SneakyThrows
     @Override

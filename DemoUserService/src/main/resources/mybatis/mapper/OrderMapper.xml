@@ -72,4 +72,6 @@
     <select id="selectByUserId" parameterType="string" resultMap="BaseResultMap">
       select * from t_order where user_id = #{userId,jdbcType=VARCHAR}
   </select>
+    <select id="selectByPrimaryKey" resultType="com.laofaner.springboot.domain.entity.OrderEntity"
+            parameterType="java.lang.String"></select>
 </mapper>

@@ -2,7 +2,6 @@ package com.laofaner.springboot.mapper;
 
 import com.laofaner.springboot.domain.entity.OrderEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public interface OrderMapper {
 
     int insertSelective(OrderEntity record);
 
-    @Select("select * from t_order where order_no = #{orderNo}")
+    //    @Select("select * from t_order where order_no = #{orderNo}")
     OrderEntity selectByPrimaryKey(String orderNo);
 
     //where user_id = #{userId}

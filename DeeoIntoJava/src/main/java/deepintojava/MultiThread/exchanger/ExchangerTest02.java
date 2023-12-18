@@ -1,4 +1,4 @@
-package deepintojava.MultiThread.bilibili;
+package deepintojava.MultiThread.exchanger;
 
 import lombok.SneakyThrows;
 

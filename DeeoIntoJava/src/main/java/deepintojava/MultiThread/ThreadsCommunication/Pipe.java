@@ -65,22 +65,22 @@ public class Pipe {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-//        PipedWriter writer = new PipedWriter();
-//
-//        PipedReader reader = new PipedReader();
-//
-//        writer.connect(reader); // 这里注意一定要连接，才能通信
-//
-//        new Thread(new ReaderThread(reader)).start();
-//
-//        Thread.sleep(1000);
-//
-//        new Thread(new WriterThread(writer)).start();
+        PipedWriter writer = new PipedWriter();
 
-        Map<String,String> map = new HashMap();
-        map.put("token","fdsv");
-        map.put("Token","bgfd");
-        System.out.println(map);
+        PipedReader reader = new PipedReader();
+
+        writer.connect(reader); // 这里注意一定要连接，才能通信
+
+        new Thread(new ReaderThread(reader)).start();
+
+        Thread.sleep(1000);
+
+        new Thread(new WriterThread(writer)).start();
+
+//        Map<String,String> map = new HashMap();
+//        map.put("token","fdsv");
+//        map.put("Token","bgfd");
+//        System.out.println(map);
 
     }
 }

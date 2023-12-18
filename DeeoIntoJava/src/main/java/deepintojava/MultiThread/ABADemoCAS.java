@@ -32,7 +32,7 @@ public class ABADemoCAS {
                 a.incrementAndGet();
                 System.out.println("operating thread " + Thread.currentThread().getName() + "【increment】 操作 :" + a.get());
                 a.decrementAndGet();
-                System.out.println("operating thread " + Thread.currentThread().getName() + "【de    crement】 操作 :" + a.get());
+                System.out.println("operating thread " + Thread.currentThread().getName() + "【decrement】 操作 :" + a.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

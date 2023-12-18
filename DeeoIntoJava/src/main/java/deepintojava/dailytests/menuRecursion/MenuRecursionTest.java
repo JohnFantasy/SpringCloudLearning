@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class MenuRecursion {
+public class MenuRecursionTest {
     @Test
     public void testTree() {
         //模拟从数据库查询出来

@@ -1,4 +1,4 @@
-package deepintojava.MultiThread.bilibili;
+package deepintojava.MultiThread.exchanger;
 
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.ExecutorService;
