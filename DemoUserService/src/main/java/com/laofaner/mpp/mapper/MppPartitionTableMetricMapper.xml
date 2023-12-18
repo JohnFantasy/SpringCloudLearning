@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laofaner.mpp.mapper.MppPartitionTableMetricMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.laofaner.mpp.entity.MppPartitionTableMetric">
+        <id column="id" property="id" />
+        <result column="parent_table_id" property="parentTableId" />
+        <result column="table_name" property="tableName" />
+        <result column="daily_amount" property="dailyAmount" />
+        <result column="daily_space" property="dailySpace" />
+        <result column="indexed" property="indexed" />
+        <result column="index_valid" property="indexValid" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+</mapper>
